@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://p2ukg3seo7gx"]
+
+[ext_resource type="Script" uid="uid://gqsu0p5lylko" path="res://addons/building_generator/building.gd" id="1_37kl0"]
+[ext_resource type="ArrayMesh" uid="uid://s3r55qls4x4m" path="res://addons/building_generator/models/brazil/copacabana/window_01/window_01.res" id="2_8uh7m"]
+
+[node name="Test" type="Node3D"]
+
+[node name="Building" type="Node3D" parent="."]
+script = ExtResource("1_37kl0")
+floors = 2
+metadata/_custom_type_script = "uid://gqsu0p5lylko"
+
+[node name="@MeshInstance3D@22107" type="MeshInstance3D" parent="Building"]
+mesh = ExtResource("2_8uh7m")
