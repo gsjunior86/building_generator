@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://p2ukg3seo7gx"]
+[gd_scene load_steps=4 format=3 uid="uid://p2ukg3seo7gx"]
 
-[ext_resource type="Script" uid="uid://gqsu0p5lylko" path="res://addons/building_generator/building.gd" id="1_37kl0"]
+[ext_resource type="Script" uid="uid://gqsu0p5lylko" path="res://addons/building_generator/facade.gd" id="1_37kl0"]
+[ext_resource type="ArrayMesh" uid="uid://s3r55qls4x4m" path="res://addons/building_generator/models/Brazil/art_deco/window_01/window_01.res" id="2_8uh7m"]
 [ext_resource type="ArrayMesh" uid="uid://c36v5gtgb354i" path="res://addons/building_generator/models/Brazil/art_deco/balcony_01/balcony_01.res" id="3_6uqi0"]
 
 [node name="Test" type="Node3D"]
@@ -9,28 +10,59 @@
 script = ExtResource("1_37kl0")
 floors = 6
 style = "art_deco"
-model = "balcony_01"
+model = "window_01"
 metadata/_custom_type_script = "uid://gqsu0p5lylko"
 
 [node name="column_1_floor_1" type="MeshInstance3D" parent="Building"]
-mesh = ExtResource("3_6uqi0")
+mesh = ExtResource("2_8uh7m")
 
 [node name="column_1_floor_2" type="MeshInstance3D" parent="Building"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-mesh = ExtResource("3_6uqi0")
+mesh = ExtResource("2_8uh7m")
 
 [node name="column_1_floor_3" type="MeshInstance3D" parent="Building"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
-mesh = ExtResource("3_6uqi0")
+mesh = ExtResource("2_8uh7m")
 
 [node name="column_1_floor_4" type="MeshInstance3D" parent="Building"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
-mesh = ExtResource("3_6uqi0")
+mesh = ExtResource("2_8uh7m")
 
 [node name="column_1_floor_5" type="MeshInstance3D" parent="Building"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+mesh = ExtResource("2_8uh7m")
+
+[node name="column_0_floor_6" type="MeshInstance3D" parent="Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+mesh = ExtResource("2_8uh7m")
+
+[node name="Building2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+script = ExtResource("1_37kl0")
+floors = 6
+style = "art_deco"
+model = "balcony_01"
+metadata/_custom_type_script = "uid://gqsu0p5lylko"
+
+[node name="column_0_floor_1" type="MeshInstance3D" parent="Building2"]
 mesh = ExtResource("3_6uqi0")
 
-[node name="column_1_floor_6" type="MeshInstance3D" parent="Building"]
+[node name="column_0_floor_2" type="MeshInstance3D" parent="Building2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mesh = ExtResource("3_6uqi0")
+
+[node name="column_0_floor_3" type="MeshInstance3D" parent="Building2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+mesh = ExtResource("3_6uqi0")
+
+[node name="column_0_floor_4" type="MeshInstance3D" parent="Building2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+mesh = ExtResource("3_6uqi0")
+
+[node name="column_0_floor_5" type="MeshInstance3D" parent="Building2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+mesh = ExtResource("3_6uqi0")
+
+[node name="column_0_floor_6" type="MeshInstance3D" parent="Building2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
 mesh = ExtResource("3_6uqi0")
