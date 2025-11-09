@@ -1,9 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
-/android/
-*.import/
-*.uid
-
+!.godot/uid_*      # keep UID files tracked
+**/.import/        # ignore all .import folders recursively
 
 # OS files
 .DS_Store
