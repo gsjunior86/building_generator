@@ -32,6 +32,7 @@ var models_path:= "res://addons/building_generator/models/{0}"
 		if is_ready:
 			if value > columns:
 				add_columns(value)
+				pass
 			elif value < columns:
 				remove_columns(abs(columns - value))
 		columns = value
@@ -179,7 +180,17 @@ func remove_floor(n: int):
 	var fl = floors
 	for column in columns:
 		for floor in fl:
-			if floor+1 > (offset):
+			if floor+1 > offset:
+				var name = name_format.format([column,floor+1])
+				remove_child(get_node(name))
+	notify_property_list_changed()
+
+func remove_columns(n: int):
+	var offset = abs(columns - n)
+	var fl = floors
+	for column in columns:
+		for floor in fl:
+			if column >= offset:
 				var name = name_format.format([column,floor+1])
 				remove_child(get_node(name))
 	notify_property_list_changed()			
@@ -229,8 +240,6 @@ func add_columns(n: int):
 				floor3D.owner = get_tree().edited_scene_root
 			notify_property_list_changed()
 	
-func remove_columns(n: int):
-	pass
 		
 func update_instances():
 	var childrens = get_children()
