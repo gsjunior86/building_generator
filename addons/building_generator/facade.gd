@@ -21,14 +21,16 @@ var mesh: ArrayMesh:
 var models_path:= "res://addons/building_generator/models/{0}"
 @export var floors: int = 1:
 	set(value):
+		value = max(1,value)
 		if is_ready:
-			if value >= floors:
+			if value > floors:
 				add_floors(value)
 			elif value < floors:
 				remove_floor(abs(floors - value))
 		floors = value
 @export var columns: int = 1:
 	set(value):
+		value = max(1,value)
 		if is_ready:
 			if value > columns:
 				add_columns(value)
