@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ilxewrm3v7dv"
-path="res://.godot/imported/window_01.glb-a08c7471e273b7825561789fdcd108b6.scn"
+path="res://.godot/imported/window_01.glb-f0d7a2e960fcd88870818662832923d8.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/brazil/copacabana/window_01/window_01.glb"
-dest_files=["res://.godot/imported/window_01.glb-a08c7471e273b7825561789fdcd108b6.scn"]
+source_file="res://addons/building_generator/models/Brazil/art_deco/window_01/window_01.glb"
+dest_files=["res://.godot/imported/window_01.glb-f0d7a2e960fcd88870818662832923d8.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/brazil/copacabana/window_01/window_01.res",
+"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/window_01/window_01.res",
 "save_to_file/path": "uid://s3r55qls4x4m"
 }
 }
