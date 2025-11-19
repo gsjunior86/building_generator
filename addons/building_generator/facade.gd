@@ -10,7 +10,7 @@ var mesh: ArrayMesh:
 		if(get_child_count() == 0):
 			var mesh_path = selected_model_path.path_join(model).path_join(model + ".res")  # or .tres, .obj, etc.
 			if ResourceLoader.exists(mesh_path):
-				mesh = load(mesh_path) as ArrayMesh
+				mesh = load(mesh_path).duplicate(true) as ArrayMesh
 			else:
 				push_warning("Mesh not found at: " + mesh_path)
 				mesh = null
@@ -22,7 +22,7 @@ var models_path:= "res://addons/building_generator/models/{0}"
 @export var floors: int = 1:
 	set(value):
 		if is_ready:
-			if value > floors:
+			if value >= floors:
 				add_floors(value)
 			elif value < floors:
 				remove_floor(abs(floors - value))
@@ -165,7 +165,8 @@ func _enter_tree():
 	
 func _ready() -> void:
 	if get_child_count() == 0:
-		add_floors(floors-1)
+		print(floors)
+		add_floors(floors)
 	is_ready = true	#initialize with one column and floor
 		
 		
@@ -201,40 +202,36 @@ func remove_columns(n: int):
 			#remove_child(child)
 			#count+=1
 			
-func add_floors(n: int):
-	var offset = abs(n - floors)
-	var last_index = floors + 1
+func add_floors(floor_count: int):
 	if get_child_count() == 0:
-		last_index = 1
-	print(offset)
-	for i in offset:
-		for x in columns:
-			var name = name_format.format([x,last_index])
+		floor_count = 1
+	for floor in range(floors, floor_count+1):
+		for col in columns:
+			var name = name_format.format([col,floor])
 			var floor3D = MeshInstance3D.new()
 			floor3D.name = name
-			floor3D.set_mesh(load(selected_model_path + "/" + model + "/" + model + ".res"))
+			floor3D.set_mesh(mesh)
 			var height = floor3D.mesh.get_aabb().size.y
 			var width =  floor3D.mesh.get_aabb().size.z
-			floor3D.position = Vector3(0,(last_index-1) * height,x * width)
-			add_child(floor3D)
-			if Engine.is_editor_hint():
-				floor3D.owner = get_tree().edited_scene_root
-			notify_property_list_changed()
-	last_index+=1
+			floor3D.position = Vector3(0,(floor-1) * height,col * width)
+			var node = get_node_or_null(name)
+			if node == null:
+				add_child(floor3D)
+				if Engine.is_editor_hint():
+					floor3D.owner = get_tree().edited_scene_root
 		
-func add_columns(n: int):
-	var offset = n - columns
-	var last_index = columns + 1
-	print(last_index)
-	for i in offset:
-		for x in floors:
-			var name = name_format.format([columns,x+1])
+	notify_property_list_changed()
+		
+func add_columns(col_count: int):
+	for col in range(columns, col_count):
+		for floor in floors:
+			var name = name_format.format([columns,floor+1])
 			var floor3D = MeshInstance3D.new()
 			floor3D.name = name
-			floor3D.set_mesh(load(selected_model_path + "/" + model + "/" + model + ".res"))
+			floor3D.set_mesh(mesh)
 			var height = floor3D.mesh.get_aabb().size.y
 			var width =  floor3D.mesh.get_aabb().size.z
-			floor3D.position = Vector3(0,x * height,(last_index-1) * width)
+			floor3D.position = Vector3(0,floor * height,col * width)
 			add_child(floor3D)
 			if Engine.is_editor_hint():
 				floor3D.owner = get_tree().edited_scene_root
