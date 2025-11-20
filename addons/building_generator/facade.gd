@@ -39,7 +39,7 @@ var models_path:= "res://addons/building_generator/models/{0}"
 				remove_columns(abs(columns - value))
 		columns = value
 
-@export_enum("Brazil","Russia") var country: String = "Brazil":
+@export_enum("Brazil","Russia","Germany") var country: String = "Brazil":
 	set(value):
 		country = value
 		style = ""
