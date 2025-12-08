@@ -1,6 +1,8 @@
 @tool
 extends Node3D
 
+class_name Facade
+
 @export_group("General Properties")
 var mesh: ArrayMesh:
 	set(value):
@@ -45,11 +47,13 @@ var models_path:= "res://addons/building_generator/models/{0}"
 
 
 var misc: Dictionary = {} as Dictionary[String, bool]
+var misc_config: MiscConfig = null
 
 func _set(property: StringName, value) -> bool:
 	if property.begins_with("misc_items/"):
 		var key = property.trim_prefix("misc_items/")
 		misc[key] = value
+		misc_config.sub_configs[key].add_item_as_children(key, self)
 		return true
 	return false
 
@@ -141,11 +145,10 @@ func _get_property_list() -> Array[Dictionary]:
 		
 		
 	if model !="" and style != "" and country != "None":
-		var config: ModelConfig = ModelConfig.new().load_config(country + "/" + style + "/" + model)
+		misc_config = MiscConfig.new().load_config(country + "/" + style + "/" + model)
 		
-		if config != null:
-			for item in config.sub_configs.keys():
-				#var value = config.sub_configs[item]
+		if misc_config != null:
+			for item in misc_config.sub_configs.keys():
 				props.append({
 						"name": "misc_items/" + item,
 						"type": TYPE_BOOL,
@@ -196,7 +199,6 @@ func _enter_tree():
 	
 func _ready() -> void:
 	if get_child_count() == 0:
-		print(floors)
 		add_floors(floors)
 	is_ready = true	#initialize with one column and floor
 		
