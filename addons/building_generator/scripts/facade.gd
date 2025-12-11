@@ -50,11 +50,17 @@ var misc: Dictionary = {} as Dictionary[String, bool]
 var misc_config: MiscConfig = null
 
 func _set(property: StringName, value) -> bool:
-	if property.begins_with("misc_items/"):
-		var key = property.trim_prefix("misc_items/")
+	var key = property.trim_prefix("misc_items/")
+	if property.begins_with("misc_items/") && (misc.is_empty() || misc[property.trim_prefix("misc_items/")] == true):
+		misc[property.trim_prefix("misc_items/")] = value
+		misc_config.sub_configs[key].add_item_as_children(key, self,true)
+		return false
+	elif property.begins_with("misc_items/") && misc[property.trim_prefix("misc_items/")] == false:
 		misc[key] = value
 		misc_config.sub_configs[key].add_item_as_children(key, self)
 		return true
+	
+	
 	return false
 
 func _get(property: StringName):
