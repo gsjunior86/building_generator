@@ -1,0 +1,66 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://du6a8p8sc4fg4"
+path="res://.godot/imported/air_conditioner_01.glb-223a092f7b59af009629d830942777b0.scn"
+
+[deps]
+
+source_file="res://addons/building_generator/models/misc/air_conditioner/air_conditioner_01.glb"
+dest_files=["res://.godot/imported/air_conditioner_01.glb-223a092f7b59af009629d830942777b0.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"air_conditioner_b": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/building_generator/materials/air_conditioner/air_conditioner_01/air_conditioner_01_b.tres",
+"use_external/path": "uid://bwayovgk5s2wm"
+},
+"air_conditioner_s": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/building_generator/materials/air_conditioner/air_conditioner_01/air_conditioner_01_s.tres",
+"use_external/path": "uid://dpo3r6wte486w"
+}
+},
+"meshes": {
+"air_conditioner_01_Mesh_0": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/building_generator/models/misc/air_conditioner/air_conditioner_01.res",
+"save_to_file/path": "uid://cak02nptpiir6"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1

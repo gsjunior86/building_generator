@@ -1,10 +1,9 @@
 @tool
 extends Node3D
 
+class_name Facade
+
 @export_group("General Properties")
-
-
-
 var mesh: ArrayMesh:
 	set(value):
 		if(get_child_count() == 0):
@@ -44,6 +43,32 @@ var models_path:= "res://addons/building_generator/models/{0}"
 		country = value
 		style = ""
 		notify_property_list_changed()
+		
+
+
+var misc: Dictionary = {} as Dictionary[String, bool]
+var misc_config: MiscConfig = null
+
+func _set(property: StringName, value) -> bool:
+	var key = property.trim_prefix("misc_items/")
+	if property.begins_with("misc_items/") && (misc.is_empty() || misc[property.trim_prefix("misc_items/")] == true):
+		misc[property.trim_prefix("misc_items/")] = value
+		misc_config.sub_configs[key].add_item_as_children(key, self,true)
+		return false
+	elif property.begins_with("misc_items/") && misc[property.trim_prefix("misc_items/")] == false:
+		misc[key] = value
+		misc_config.sub_configs[key].add_item_as_children(key, self)
+		return true
+	
+	
+	return false
+
+func _get(property: StringName):
+	var prop := String(property)
+	if prop.begins_with("misc_items/"):
+		var key := prop.get_slice("/", 1)
+		return misc.get(key)
+	return null
 	
 var style: String = "":
 	set(value):
@@ -123,6 +148,19 @@ func _get_property_list() -> Array[Dictionary]:
 			#"usage": PROPERTY_USAGE_DEFAULT
 			"usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_READ_ONLY
 		})
+		
+		
+	if model !="" and style != "" and country != "None":
+		misc_config = MiscConfig.new().load_config(country + "/" + style + "/" + model)
+		
+		if misc_config != null:
+			for item in misc_config.sub_configs.keys():
+				props.append({
+						"name": "misc_items/" + item,
+						"type": TYPE_BOOL,
+						"usage": PROPERTY_USAGE_DEFAULT
+					})
+			
 
 	return props
 	
@@ -167,7 +205,6 @@ func _enter_tree():
 	
 func _ready() -> void:
 	if get_child_count() == 0:
-		print(floors)
 		add_floors(floors)
 	is_ready = true	#initialize with one column and floor
 		
