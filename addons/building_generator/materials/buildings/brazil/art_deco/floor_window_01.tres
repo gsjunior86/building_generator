@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b723oy6v3iadi"]
+
+[ext_resource type="Texture2D" uid="uid://mbjhpi7vfarb" path="res://addons/building_generator/textures/buildings/brazil/art_deco/floor_window_01/floor_window_01_d.tga" id="1_8kygn"]
+[ext_resource type="Texture2D" uid="uid://btny3rulv84fx" path="res://addons/building_generator/textures/buildings/brazil/art_deco/floor_window_01/floor_window_01_normal.tga" id="2_0v3fu"]
+
+[resource]
+albedo_texture = ExtResource("1_8kygn")
+normal_enabled = true
+normal_texture = ExtResource("2_0v3fu")

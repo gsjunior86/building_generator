@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://hmcfq6w1x87"]
+
+[ext_resource type="Texture2D" uid="uid://dtqo84sm65tls" path="res://addons/building_generator/textures/buildings/brazil/art_deco/shop_01/shop_01_d.tga" id="1_qgqd7"]
+[ext_resource type="Texture2D" uid="uid://fm6vcvidbitl" path="res://addons/building_generator/textures/buildings/brazil/art_deco/shop_01/shop_01_normal.tga" id="2_ledok"]
+
+[resource]
+albedo_texture = ExtResource("1_qgqd7")
+normal_enabled = true
+normal_texture = ExtResource("2_ledok")
