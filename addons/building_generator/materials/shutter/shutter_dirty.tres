@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bdein4vmmucgx"]
+
+[ext_resource type="Texture2D" uid="uid://6eesuxku3oeu" path="res://addons/building_generator/textures/shutter/shutter_dirty_d.tga" id="1_nukxr"]
+[ext_resource type="Texture2D" uid="uid://dyujv8qk24whd" path="res://addons/building_generator/textures/shutter/shutter_dirty_normal.tga" id="2_wqlfu"]
+
+[resource]
+albedo_texture = ExtResource("1_nukxr")
+normal_enabled = true
+normal_texture = ExtResource("2_wqlfu")

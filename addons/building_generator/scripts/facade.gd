@@ -6,15 +6,12 @@ class_name Facade
 @export_group("General Properties")
 var mesh: ArrayMesh:
 	set(value):
-		if(get_child_count() == 0):
-			var mesh_path = selected_model_path.path_join(model).path_join(model + ".res")  # or .tres, .obj, etc.
-			if ResourceLoader.exists(mesh_path):
-				mesh = load(mesh_path).duplicate(true) as ArrayMesh
-			else:
-				push_warning("Mesh not found at: " + mesh_path)
-				mesh = null
+		var mesh_path: String = selected_model_path.path_join(model).path_join(model + ".res")  # or .tres, .obj, etc.
+		if ResourceLoader.exists(mesh_path):
+			mesh = duplicate_mesh_with_materials(load(mesh_path).duplicate_deep(Resource.DEEP_DUPLICATE_ALL) as ArrayMesh)
 		else:
-			mesh = value
+			push_warning("Mesh not found at: " + mesh_path)
+			mesh = null
 		notify_property_list_changed()
 
 var models_path:= "res://addons/building_generator/models/{0}"
@@ -51,15 +48,14 @@ var misc_config: MiscConfig = null
 
 func _set(property: StringName, value) -> bool:
 	var key = property.trim_prefix("misc_items/")
-	if property.begins_with("misc_items/") && (misc.is_empty() || misc[property.trim_prefix("misc_items/")] == true):
+	if misc_config != null && (property.begins_with("misc_items/") && (misc.is_empty() || misc[property.trim_prefix("misc_items/")] == true)):
 		misc[property.trim_prefix("misc_items/")] = value
 		misc_config.sub_configs[key].add_item_as_children(key, self,true)
 		return false
-	elif property.begins_with("misc_items/") && misc[property.trim_prefix("misc_items/")] == false:
+	elif !misc.is_empty() && (property.begins_with("misc_items/") && misc[property.trim_prefix("misc_items/")] == false):
 		misc[key] = value
 		misc_config.sub_configs[key].add_item_as_children(key, self)
 		return true
-	
 	
 	return false
 
@@ -215,6 +211,18 @@ func _has_children(name: String) -> bool:
 			return true
 	return false;
 
+
+func duplicate_mesh_with_materials(original_mesh: Mesh) -> Mesh:
+	var unique_mesh: ArrayMesh = original_mesh.duplicate(true) # deep copy
+
+	# Ensure every surface material is unique
+	for surface in range(unique_mesh.get_surface_count()):
+		var mat := unique_mesh.surface_get_material(surface)
+		if mat:
+			unique_mesh.surface_set_material(surface, mat.duplicate())
+	return unique_mesh
+
+
 func remove_floor(n: int):
 	var offset = abs(floors - n)
 	var fl = floors
@@ -288,4 +296,4 @@ func update_instances():
 
 	
 func initialize():
-	print('initialization')
+	pass

@@ -8,5 +8,26 @@
 				{ "x": 1.34, "y": 0.65, "z": -1.05 }
 			]
 		}
+	},
+	"Brazil/art_deco/window_01": {
+		"shutter": {
+			"positions": [
+				{ "x": 0, "y": 0, "z": 0 }
+			]
+		}
+	},
+	"Brazil/art_deco/window_02": {
+		"shutter": {
+			"positions": [
+				{ "x": 0, "y": 0, "z": 0 }
+			]
+		}
+	},
+	"Brazil/art_deco/window_03": {
+		"shutter": {
+			"positions": [
+				{ "x": 0, "y": 0, "z": 0 }
+			]
+		}
 	}
 }

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dd0lh6mpg8t8i"]
+
+[ext_resource type="Texture2D" uid="uid://bxy6xobn1ip7d" path="res://addons/building_generator/textures/buildings/brazil/art_deco/entrance_01/entrance_01_d.tga" id="1_sbywn"]
+[ext_resource type="Texture2D" uid="uid://bwhcamfrb6u33" path="res://addons/building_generator/textures/buildings/brazil/art_deco/entrance_01/entrance_01_normal.tga" id="2_e46gi"]
+
+[resource]
+albedo_texture = ExtResource("1_sbywn")
+normal_enabled = true
+normal_texture = ExtResource("2_e46gi")
