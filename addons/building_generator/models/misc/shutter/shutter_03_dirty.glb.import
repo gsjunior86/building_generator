@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b1fypqos44f6j"
-path="res://.godot/imported/entrance_03.glb-f685b1f0458bbcbc4b7da8ed1951a168.scn"
+uid="uid://dl15dj3rvwl0h"
+path="res://.godot/imported/shutter_03_dirty.glb-5e0e26629efb08d8188535d397bf0514.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/entrance_03/entrance_03.glb"
-dest_files=["res://.godot/imported/entrance_03.glb-f685b1f0458bbcbc4b7da8ed1951a168.scn"]
+source_file="res://addons/building_generator/models/misc/shutter/shutter_03_dirty.glb"
+dest_files=["res://.godot/imported/shutter_03_dirty.glb-5e0e26629efb08d8188535d397bf0514.scn"]
 
 [params]
 
@@ -38,15 +38,27 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
+"materials": {
+"metal": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/building_generator/materials/misc/chrome_metal.tres",
+"use_external/path": "uid://42qnm414layv"
+},
+"shutter": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/building_generator/materials/shutter/shutter_dirty.tres",
+"use_external/path": "uid://bdein4vmmucgx"
+}
+},
 "meshes": {
-"entrance_03_Cube_012": {
+"shutter_03_dirty_Cube_025": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/entrance_03/entrance_03.res",
-"save_to_file/path": "uid://xqq0lqe500qs"
+"save_to_file/fallback_path": "res://addons/building_generator/models/misc/shutter/shutter_03_dirty.res",
+"save_to_file/path": "uid://b5nf2gmog0ash"
 }
 }
 }

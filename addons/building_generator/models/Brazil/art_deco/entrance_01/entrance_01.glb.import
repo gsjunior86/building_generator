@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d0t3lyymhqum1"
+uid="uid://cxocepujx8f36"
 path="res://.godot/imported/entrance_01.glb-119a55cd10f81f6a18c7d8a52af8a0f3.scn"
 
 [deps]
@@ -38,15 +38,22 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
+"materials": {
+"entrance": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/building_generator/materials/buildings/brazil/art_deco/entrance_01.tres",
+"use_external/path": "uid://dd0lh6mpg8t8i"
+}
+},
 "meshes": {
-"entrance_01_Cube_010": {
+"entrance_01_Cube_003": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/entrance_01/entrance_01.res",
-"save_to_file/path": "uid://4ff84a3fbpw7"
+"save_to_file/path": "uid://dd0ov2clv2dqh"
 }
 }
 }

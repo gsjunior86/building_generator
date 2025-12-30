@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bu0cjdvovv3hx"
+uid="uid://chni648gippom"
 path="res://.godot/imported/shutter_01.glb-57e306bf81e0a23aaf8db1c1c877674c.scn"
 
 [deps]
@@ -38,15 +38,27 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
+"materials": {
+"metal": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/building_generator/materials/misc/chrome_metal.tres",
+"use_external/path": "uid://42qnm414layv"
+},
+"shutter": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/building_generator/materials/shutter/shutter.tres",
+"use_external/path": "uid://c4pcfojevdh8n"
+}
+},
 "meshes": {
-"shutter_01_Cube_019": {
+"shutter_01_Cube_002": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://addons/building_generator/models/misc/shutter/shutter_01.res",
-"save_to_file/path": "uid://c2rbesn8c1pik"
+"save_to_file/path": "uid://cmsfcqhc31m31"
 }
 }
 }

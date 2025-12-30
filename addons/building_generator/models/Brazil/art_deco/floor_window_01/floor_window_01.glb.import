@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://2di30rhvlg32"
-path="res://.godot/imported/shutter_04.glb-8ed20acf7671c7794c6c3089224174ab.scn"
+uid="uid://cpnnpe45kfgxp"
+path="res://.godot/imported/floor_window_01.glb-c99a68be7131af7d9ba91cde79ed0e75.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/misc/shutter/shutter_04.glb"
-dest_files=["res://.godot/imported/shutter_04.glb-8ed20acf7671c7794c6c3089224174ab.scn"]
+source_file="res://addons/building_generator/models/Brazil/art_deco/floor_window_01/floor_window_01.glb"
+dest_files=["res://.godot/imported/floor_window_01.glb-c99a68be7131af7d9ba91cde79ed0e75.scn"]
 
 [params]
 
@@ -38,15 +38,22 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
+"materials": {
+"floor_window": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/building_generator/materials/buildings/brazil/art_deco/floor_window_01.tres",
+"use_external/path": "uid://b723oy6v3iadi"
+}
+},
 "meshes": {
-"shutter_04_Cube_026": {
+"floor_window_01_Cube_005": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/misc/shutter/shutter_04.res",
-"save_to_file/path": "uid://by0g3f74ger7a"
+"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/floor_window_01/floor_window_01.res",
+"save_to_file/path": "uid://dwrshearuhk5x"
 }
 }
 }
