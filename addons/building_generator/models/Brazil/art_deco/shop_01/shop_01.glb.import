@@ -39,19 +39,14 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"shop_01_facade": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/buildings/brazil/art_deco/shop_01.tres",
-"use_external/path": "uid://hmcfq6w1x87"
-},
 "shop_doors": {
-"use_external/enabled": true,
+"use_external/enabled": false,
 "use_external/fallback_path": "res://addons/building_generator/materials/buildings/brazil/art_deco/shop_01.tres",
 "use_external/path": "uid://hmcfq6w1x87"
 }
 },
 "meshes": {
-"shop_01_Cube_008": {
+"shop_01_Cube_013": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
