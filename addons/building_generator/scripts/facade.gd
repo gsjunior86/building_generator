@@ -187,6 +187,7 @@ func _get_model_for_styles(country_name: String, style: String) -> Array[String]
 				ret.append(file_name)
 			file_name = dir.get_next()
 		dir.list_dir_end()
+	ret.sort()
 	return ret
 
 
