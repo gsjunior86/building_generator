@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dff5wwmw6so2b"
-path="res://.godot/imported/shop_01.glb-fe8bdf2ca0cc9d0042ca63869efa61b4.scn"
+uid="uid://bha3v8703yevt"
+path="res://.godot/imported/shop_02.glb-b7ee2e168c8f4472292af51fa91a4299.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/shop_01/shop_01.glb"
-dest_files=["res://.godot/imported/shop_01.glb-fe8bdf2ca0cc9d0042ca63869efa61b4.scn"]
+source_file="res://addons/building_generator/models/Brazil/art_deco/shop_02/shop_02.glb"
+dest_files=["res://.godot/imported/shop_02.glb-b7ee2e168c8f4472292af51fa91a4299.scn"]
 
 [params]
 
@@ -38,22 +38,15 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
-"materials": {
-"shop_doors": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://addons/building_generator/materials/buildings/brazil/art_deco/shop_01.tres",
-"use_external/path": "uid://hmcfq6w1x87"
-}
-},
 "meshes": {
-"shop_01_Cube_013": {
+"shop_02_Cube_008": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/shop_01/shop_01.res",
-"save_to_file/path": "uid://bi4usufy5kkkq"
+"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/shop_02/shop_02.res",
+"save_to_file/path": "uid://dnxf2ljvl8q83"
 }
 }
 }
