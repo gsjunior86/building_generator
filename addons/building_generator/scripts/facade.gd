@@ -14,6 +14,7 @@ var mesh: ArrayMesh:
 			mesh = null
 		notify_property_list_changed()
 
+
 var models_path:= "res://addons/building_generator/models/{0}"
 @export var floors: int = 1:
 	set(value):
@@ -45,6 +46,7 @@ var models_path:= "res://addons/building_generator/models/{0}"
 
 var misc: Dictionary = {} as Dictionary[String, bool]
 var misc_config: MiscConfig = null
+var is_building_parent: bool = true
 
 func _set(property: StringName, value) -> bool:
 	var key = property.trim_prefix("misc_items/")
@@ -100,63 +102,64 @@ var model: String = "":
 		update_instances()
 		notify_property_list_changed()
 var selected_model_path: String = ""
-	
+
 func _get_property_list() -> Array[Dictionary]:
 	var props: Array[Dictionary] = []
 	# --- Exported enum for style (only visible when Brazil is selected) ---
-	if country != "None":
-		var style_options := _get_styles_for_country(country)
-		if style_options.size() > 0:
-			if style == "":
-				style = style_options.get(0)
-			var styles_hint_string := ",".join(style_options)\
-				 if style_options.size() > 0 else "None"
-			props.append({
-					"name": "style",
-					"type": TYPE_STRING,
-					"hint": PROPERTY_HINT_ENUM,
-					"hint_string": styles_hint_string,
-					"usage": PROPERTY_USAGE_DEFAULT
-				})
-		
-	
-	
-	if style != "":
-		var models_options := _get_model_for_styles(country, style)
-		if models_options.size() > 0:
-			if model == "":
-				self.model = models_options.get(0)
-			var model_hint_string := ",".join(models_options)
-			props.append({
-				"name": "model",
-				"type": TYPE_STRING,
-				"hint": PROPERTY_HINT_ENUM,
-				"hint_string": model_hint_string,
-				"usage": PROPERTY_USAGE_DEFAULT
-			})
-			
-	if model != "":
-		props.append({
-			"name": "mesh",
-			"type": TYPE_OBJECT,
-			"hint": PROPERTY_HINT_RESOURCE_TYPE,
-			"hint_string": "ArrayMesh",
-			#"usage": PROPERTY_USAGE_DEFAULT
-			"usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_READ_ONLY
-		})
-		
-		
-	if model !="" and style != "" and country != "None":
-		misc_config = MiscConfig.new().load_config(country + "/" + style + "/" + model)
-		
-		if misc_config != null:
-			for item in misc_config.sub_configs.keys():
+	if is_ready:
+		if country != "None":
+			var style_options := _get_styles_for_country(country)
+			if style_options.size() > 0:
+				if style == "":
+					style = style_options.get(0)
+				var styles_hint_string := ",".join(style_options)\
+					 if style_options.size() > 0 else "None"
 				props.append({
-						"name": "misc_items/" + item,
-						"type": TYPE_BOOL,
+						"name": "style",
+						"type": TYPE_STRING,
+						"hint": PROPERTY_HINT_ENUM,
+						"hint_string": styles_hint_string,
 						"usage": PROPERTY_USAGE_DEFAULT
 					})
 			
+		
+		
+		if style != "":
+			var models_options := _get_model_for_styles(country, style)
+			if models_options.size() > 0:
+				if model == "":
+					self.model = models_options.get(0)
+				var model_hint_string := ",".join(models_options)
+				props.append({
+					"name": "model",
+					"type": TYPE_STRING,
+					"hint": PROPERTY_HINT_ENUM,
+					"hint_string": model_hint_string,
+					"usage": PROPERTY_USAGE_DEFAULT
+				})
+				
+		if model != "":
+			props.append({
+				"name": "mesh",
+				"type": TYPE_OBJECT,
+				"hint": PROPERTY_HINT_RESOURCE_TYPE,
+				"hint_string": "ArrayMesh",
+				#"usage": PROPERTY_USAGE_DEFAULT
+				"usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_READ_ONLY
+			})
+			
+			
+		if model !="" and style != "" and country != "None":
+			misc_config = MiscConfig.new().load_config(country + "/" + style + "/" + model)
+			
+			if misc_config != null:
+				for item in misc_config.sub_configs.keys():
+					props.append({
+							"name": "misc_items/" + item,
+							"type": TYPE_BOOL,
+							"usage": PROPERTY_USAGE_DEFAULT
+						})
+				
 
 	return props
 	
@@ -201,9 +204,8 @@ func _enter_tree():
 		tree_entered.connect(initialize)
 	
 func _ready() -> void:
-	if get_child_count() == 0:
+	if get_child_count() == 0 && is_ready:
 		add_floors(floors)
-	is_ready = true	#initialize with one column and floor
 		
 		
 func _has_children(name: String) -> bool:
@@ -293,8 +295,16 @@ func update_instances():
 			var instance3d = child as MeshInstance3D
 			instance3d.set_mesh(mesh)
 			child = instance3d
-		
+			
 
-	
+func _get_configuration_warnings():
+	var warnings = PackedStringArray()
+	is_ready = true
+	if not is_instance_valid(get_parent()) or not (get_parent() is Building):
+		is_ready = false
+		warnings.append("This node must be a child of a Building node.")
+	request_ready()
+	return warnings
+		
 func initialize():
 	pass
