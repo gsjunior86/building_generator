@@ -5,7 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://lidy6ilesl4x" path="res://addons/building_generator/models/Brazil/art_deco/balcony_02/balcony_02.res" id="3_ppyta"]
 [ext_resource type="ArrayMesh" uid="uid://c36v5gtgb354i" path="res://addons/building_generator/models/Brazil/art_deco/balcony_01/balcony_01.res" id="3_ykrsh"]
 [ext_resource type="ArrayMesh" uid="uid://cak02nptpiir6" path="res://addons/building_generator/models/misc/air_conditioner/air_conditioner_01.res" id="4_ykrsh"]
-[ext_resource type="ArrayMesh" uid="uid://b3rod32ac5xuv" path="res://addons/building_generator/models/Brazil/art_deco/shop_01/shop_01.res" id="11_5tkv4"]
+[ext_resource type="ArrayMesh" uid="uid://bi4usufy5kkkq" path="res://addons/building_generator/models/Brazil/art_deco/shop_01/shop_01.res" id="11_5tkv4"]
 [ext_resource type="Texture2D" uid="uid://dyd82bbp8o2l8" path="res://addons/building_generator/textures/hdri/citrus_orchard_puresky_4k.exr" id="12_5tkv4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0m0f1"]
