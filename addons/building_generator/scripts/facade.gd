@@ -195,7 +195,7 @@ func _get_model_for_styles(country_name: String, style: String) -> Array[String]
 
 
 static var name_format = "column_{0}_floor_{1}"
-var is_ready = false
+var is_ready = true
 
 
 
@@ -204,7 +204,7 @@ func _enter_tree():
 		tree_entered.connect(initialize)
 	
 func _ready() -> void:
-	if get_child_count() == 0 && is_ready:
+	if get_child_count() == 0:
 		add_floors(floors)
 		
 		
@@ -302,6 +302,7 @@ func _get_configuration_warnings():
 	is_ready = true
 	if not is_instance_valid(get_parent()) or not (get_parent() is Building):
 		is_ready = false
+		remove_floor(1)
 		warnings.append("This node must be a child of a Building node.")
 	request_ready()
 	return warnings
