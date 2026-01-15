@@ -1,7 +1,13 @@
-[gd_scene load_steps=13 format=4 uid="uid://p2ukg3seo7gx"]
+[gd_scene load_steps=26 format=4 uid="uid://p2ukg3seo7gx"]
 
 [ext_resource type="Script" uid="uid://dv8wc7eiyx6o1" path="res://addons/building_generator/scripts/building.gd" id="2_6uqi0"]
 [ext_resource type="Script" uid="uid://gqsu0p5lylko" path="res://addons/building_generator/scripts/facade.gd" id="3_ppyta"]
+[ext_resource type="ArrayMesh" uid="uid://d4h6h61k2li07" path="res://addons/building_generator/models/misc/shutter/shutter_02.res" id="4_xersf"]
+[ext_resource type="ArrayMesh" uid="uid://cmsfcqhc31m31" path="res://addons/building_generator/models/misc/shutter/shutter_01.res" id="5_00tp4"]
+[ext_resource type="ArrayMesh" uid="uid://b5nf2gmog0ash" path="res://addons/building_generator/models/misc/shutter/shutter_03_dirty.res" id="6_77dp3"]
+[ext_resource type="ArrayMesh" uid="uid://cucuseoi3wsbr" path="res://addons/building_generator/models/misc/shutter/shutter_02_dirty.res" id="7_5tkv4"]
+[ext_resource type="ArrayMesh" uid="uid://cb2dtu5ru13rw" path="res://addons/building_generator/models/misc/shutter/shutter_03.res" id="8_0m0f1"]
+[ext_resource type="ArrayMesh" uid="uid://o2t0vwmlik8c" path="res://addons/building_generator/models/misc/shutter/shutter_01_dirty.res" id="9_b0q6j"]
 [ext_resource type="Texture2D" uid="uid://dyd82bbp8o2l8" path="res://addons/building_generator/textures/hdri/citrus_orchard_puresky_4k.exr" id="12_5tkv4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0m0f1"]
@@ -44,25 +50,25 @@ roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_vbegm"]
 _surfaces = [{
-"aabb": AABB(0.12499982, -1.5000001, -1.5, 1e-05, 2.9, 3.0000002),
+"aabb": AABB(0.12499982, -1.5000002, -1.3807689, 1e-05, 3, 2.761538),
 "format": 34896613377,
-"index_count": 78,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAABAAMABAAFAAEABgAFAAQABgAHAAUACAAFAAcACAAHAAkAAAACAAoAAAAKAAsADAAKAAIADAACAA0ADQAOAAwADQAPAA4ADQAQAA8ADQARABAACAAQABEACAASABAACQASAAgACQATABIAFAAVABQAFAAVABUAFgAVABUAFgAVABYAFAAXABQAFAAXABcA"),
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAABAAMABAAFAAEABgAFAAQABgAHAAUACAAFAAcACAAHAAkAAAACAAoAAAAKAAsADAAKAAIADAACAA0ADQAOAAwADQAPAA4ADQAQAA8ADQARABAACAAQABEACAASABAACQASAAgACQATABIA"),
 "name": "wall_material",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 24,
-"vertex_data": PackedByteArray("AADb0wAAAAAAAPY0mRkAAAAA29OZGQAAAAD2NAAAAAAAABsuAAAAAAAAGy6ZGQAAAADTCAAAAAAAANMImRkAAAAAGy5l5gAAAADTCGXmAAAAAP//mRkAAAAA//8AAAAAAAD//2XmAAAAANvTZeYAAAAA/////wAAAADb0///AAAAAPY0//8AAAAA9jRl5gAAAAAbLv//AAAAANMI//8AAAAAAABl5gAAAAAAAJkZAAAAAAAAAAAAAAAAAAD//wAA")
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AADMzAAAAAAAADMzwRAAAAAAzMzBEAAAAAAzMwAAAAAAAJEsAAAAAAAAkSzBEAAAAAAAAAAAAAAAAAAAwRAAAAAAkSw97wAAAAAAAD3vAAAAAP//wRAAAAAA//8AAAAAAAD//z3vAAAAAMzMPe8AAAAA/////wAAAADMzP//AAAAADMz//8AAAAAMzM97wAAAACRLP//AAAAAAAA//8AAA==")
 }, {
-"aabb": AABB(-0.025000183, -1.5000001, -1.5, 0.28248218, 3, 3.0000002),
+"aabb": AABB(-0.025000183, -1.5000002, -1.5, 0.28248218, 3, 3.0000002),
 "format": 34896613377,
-"index_count": 258,
-"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQABAADAAUABAAFAAYAAwAHAAUABgAFAAcAAwABAAcABgAHAAgACAAHAAkACQAHAAEACAAJAAoAAAALAAEACQABAAsADAALAAAACgAJAA0ACwANAAkACgANAA4ADAAPAAsACwAPAA0ADgAPAAwADgANAA8AEAARABIAEgARABMAEgATABQAFAATABUAFAAVABYAFwAVABMAFgAVABcAFwATABEAFgAXABgAGAAXABkAEQAZABcAGAAZABoAEAAbABEAEQAbABkAHAAbABAAGgAZAB0AHQAZABsAGgAdAB4AHAAfABsAHQAbAB8AHgAfABwAHgAdAB8AIAAhACIAIQAgACMAIQAjACQAIgAlACAAJAAmACEAIgAnACUAKAAmACQAJgAoACkAJgApACoAJgAqACsAIgAsACcAKwAtACYALAAiAC4ALQArAC8ALQAvAC4ALgAiAC0AIgAwAC0AMAAxAC0AIgAyADAAMgAzADAAIgA0ADIAMgA0ADMANQAwADMANAA1ADMAMAA2ADEANgAwADUANAA3ADUAOAA0ACIANAA5ADcANQA3ADkANAA4ADkANQA5ADoANgA1ADoANgA6ADkAOAAiADsAMQA4ADsAMQA2ADwAMQA8ADgANgA5AD0APAA2AD0AOQA4AD0APAA9ADgA"),
+"index_count": 294,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAAAFAAEABAADAAYABgADAAEABAAGAAcABgABAAgABwAGAAgACAABAAUABwAIAAkACgAFAAAACQAIAAsACAAFAAsACQALAAwADAALAA0ADQALAAUADAANAA4ACgAPAAUADQAFAA8AEAAPAAoADgANABEADgARABIADQAPABMAEAATAA8ADQATABEAEgATABAAEgARABMAFAAVABYAFAAXABUAFgAVABgAFwAYABUAFgAYABkAGgAXABQAGQAYABsAFwAbABgAGQAbABwAHAAbAB0AFwAdABsAHAAdAB4AGgAfABcAFwAfAB0AIAAfABoAIAAhAB8AIQAdAB8AIgAhACAAHgAdACMAIQAjAB0AHgAjACQAIgAlACEAJQAjACEAJgAlACIAJAAjACcAJAAnACYAJQAnACMAJgAnACUAKAApACoAKQAoACsAKQArACwAKgAtACgALAAuACkAKgAvAC0AMAAuACwALgAwADEALgAxADIALgAyADMAKgA0AC8AMwA1AC4ANAAqADYANQAzADcANQA3ADYANgAqADUAKgA4ADUAOAA5ADUAKgA6ADgAOgA7ADgAKgA8ADoAOgA8ADsAPQA4ADsAPAA9ADsAOAA+ADkAPgA4AD0APAA/AD0AQAA8ACoAPABBAD8APQA/AEEAPABAAEEAPQBBAEIAPgA9AEIAPgBCAEEAQAAqAEMAOQBAAEMAOQA+AEQAOQBEAEAAPgBBAEUARAA+AEUAQQBAAEUARABFAEAA"),
 "name": "wall_2_material",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 62,
-"vertex_data": PackedByteArray("74d292XmAABosnb3mRkAAO+HdveZGQAAaLJ29wAAAADvh3b3AAAAAGiy//8AAAAA74f//wAAAABosv//mRkAAO+H//+ZGQAAaLL//2XmAADvh///ZeYAAGiydvdl5gAA74d29///AABosv////8AAO+H/////wAAaLJ29///AADvh4gImRkAAGiyiAhl5gAA74eICGXmAABosogI//8AAO+HiAj//wAAaLIAAP//AADvhwAA//8AAGiyAABl5gAA74cAAGXmAABosgAAmRkAAO+HAACZGQAAaLKICJkZAADvh4gIAAAAAGiyAAAAAAAA74cAAAAAAABosogIAAAAAAAAMzOZGQAA74fMzJkZAADvhzMzmRkAAAAAxaKZGQAAAADMzJkZAAAAADMzzEwAAO+HzMxl5gAAAAAzM/9/AAAAAMzMzEwAAAAAzMz/fwAAAADMzDKzAAAAAMzMZeYAAAAAMzMyswAA74czM2XmAAAAADMzZeYAAAAAxaJl5gAAdPIzM2XmAADvh5EsZeYAAHTyMzOZGQAA/vudMmXmAAD++50ymRkAAP//BzJl5gAA/vsnLWXmAAD//wcymRkAAHTykSyZGQAA//+9LZkZAAD//70tZeYAAO+HkSyZGQAAdPKRLGXmAAD++yctmRkAAA==")
+"vertex_count": 70,
+"vertex_data": PackedByteArray("74czM///AACKt5Es//8AAO+HkSz//wAAircAAP//AADvhwAA//8AAIq3MzP//wAAircAANL1AADvhwAA0vUAAIq3kSzS9QAA74eRLNL1AADvh8zM//8AAIq3MzPS9QAA74czM9L1AACKt8zM0vUAAO+HzMzS9QAAirfMzP//AADvh/////8AAIq3///S9QAA74f//9L1AACKt/////8AAO+HzMwAAAAAirf//wAAAADvh///AAAAAIq3zMwAAAAAirf//ywKAADvh///LAoAAO+HMzMAAAAAirfMzCwKAADvh8zMLAoAAIq3MzMsCgAA74czMywKAACKtzMzAAAAAO+HkSwAAAAAireRLAAAAADvhwAAAAAAAIq3kSwsCgAA74eRLCwKAACKtwAAAAAAAO+HAAAsCgAAircAACwKAAAAADMzmRkAAO+HzMyZGQAA74czM5kZAAAAAMWimRkAAAAAzMyZGQAAAAAzM8xMAADvh8zMZeYAAAAAMzP/fwAAAADMzMxMAAAAAMzM/38AAAAAzMwyswAAAADMzGXmAAAAADMzMrMAAO+HMzNl5gAAAAAzM2XmAAAAAMWiZeYAAHTyMzNl5gAA74eRLGXmAAB08jMzmRkAAP77nTJl5gAA/vudMpkZAAD//wcyZeYAAP77Jy1l5gAA//8HMpkZAAB08pEsmRkAAP//vS2ZGQAA//+9LWXmAADvh5EsmRkAAHTykSxl5gAA/vsnLZkZAAA=")
 }, {
 "aabb": AABB(-0.059307188, -0.9, -1.2, 0.07391322, 1.8000001, 2.4),
 "format": 34896613377,
@@ -87,31 +93,31 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ehkex"]
-resource_name = "window_02_Cube_014"
+resource_name = "window_03_Cube_015"
 _surfaces = [{
-"aabb": AABB(0.12499982, -1.5000001, -1.5, 1e-05, 2.9, 3.0000002),
-"attribute_data": PackedByteArray("//95mS/zXeYv83mZ//9d5v//r+kv86/p///X9C/z1/SvjK/pr4zX9C/zqIz//6iMr4yojK+MeZnff6iM3395md9/XeavjF3m33+v6d9/1/SvjP//L/P//6+M///ff///33///y/z/////////////w=="),
+"aabb": AABB(0.12499982, -1.5000002, -1.3807689, 1e-05, 3, 2.761538),
+"attribute_data": PackedByteArray("//95mUD5XeZA+XmZ//9d5v//r+lA+a/p/////0D5//9aja/pWo3//0D513///9d/Wo3Xf1qNeZmchtd/nIZ5mZyGXeZajV3mnIav6ZyG//8="),
 "format": 34896613399,
-"index_count": 78,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAABAAMABAAFAAEABgAFAAQABgAHAAUACAAFAAcACAAHAAkAAAACAAoAAAAKAAsADAAKAAIADAACAA0ADQAOAAwADQAPAA4ADQAQAA8ADQARABAACAAQABEACAASABAACQASAAgACQATABIAFAAVABYAFgAXABQAFgAYABcAFAAZABUAGgAVABkAGgAZABsA"),
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAABAAMABAAFAAEABgAFAAQABgAHAAUACAAFAAcACAAHAAkAAAACAAoAAAAKAAsADAAKAAIADAACAA0ADQAOAAwADQAPAA4ADQAQAA8ADQARABAACAAQABEACAASABAACQASAAgACQATABIA"),
 "material": SubResource("StandardMaterial3D_6uqi0"),
 "name": "wall_material",
 "primitive": 3,
-"uv_scale": Vector4(2.0019596, 2.0014935, 0, 0),
-"vertex_count": 28,
-"vertex_data": PackedByteArray("AADb0wAA/78AAPY0mRn/vwAA29OZGf+/AAD2NAAA/78AABsuAAD/vwAAGy6ZGf+/AADTCAAA/78AANMImRn/vwAAGy5l5v+/AADTCGXm/78AAP//mRn/vwAA//8AAP+/AAD//2Xm/78AANvTZeb/vwAA//////+/AADb0////78AAPY0////vwAA9jRl5v+/AAAbLv///78AANMI////vwAAAABl5v+/AAAAAJkZ/78AAAAAZeb/vwAAAAD///+/AAAAAP///78AAAAAmRn/vwAAAAAAAP+/AAAAAAAA/7//fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP///3////9/////f////3////9/////f////3////9/")
+"uv_scale": Vector4(1.9017637, 2.0014935, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AADMzAAA/78AADMzwRD/vwAAzMzBEP+/AAAzMwAA/78AAJEsAAD/vwAAkSzBEP+/AAAAAAAA/78AAAAAwRD/vwAAkSw97/+/AAAAAD3v/78AAP//wRD/vwAA//8AAP+/AAD//z3v/78AAMzMPe//vwAA//////+/AADMzP///78AADMz////vwAAMzM97/+/AACRLP///78AAAAA////v/9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA")
 }, {
-"aabb": AABB(-0.025000183, -1.5000001, -1.5, 0.28248218, 3, 3.0000002),
-"attribute_data": PackedByteArray("r4yojC/zqIwv86iM//+ojP//qIyvjKiM33+ojN9/qIwv89f0r4zX9K+M1/Tff9f033/X9C/z1/T//9f0///X9K+18c2tvQNurb3xza+1QoivtQNur7X/f6295v+tvf9/r7X5n6+187+vtezfr7Xm/6+15v+tvf9/rb3m//DD5v/ww/9/r7Xs36+187+vtfmfr7X/f6+1A26tvfHNrb0Dbq+1QoivtfHN8MMV0q298c2tvRXSf8ROzvDD8c28xFrRf8S30bzErM7ww/HNrb0V0q298c1/xLfR8MMV0rzErM5/xE7OvMRa0a295v/ww/9/rb3/f/DD5v//f6zO3v9a0f9/WtHe/6zO3v9Ozv9/rM7/f07O3v+szv9/t9He/1rR3v+30f9/WtHww/9/f8Tm//DD5v9/xP9/8MPm/3/E/3/ww/9/f8Tm//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b/r4yojN9/13+vjNd/33+ojC/zqIwv89d///+ojP//13+vjNf0L/P//6+M///ff9f033///y/z1/T////////X9N9///+vjP//r4z//99///8v8///L/P//////////////3/m//9/5v//f+b//3/m/w=="),
+"aabb": AABB(-0.025000183, -1.5000002, -1.5, 0.28248218, 3, 3.0000002),
+"attribute_data": PackedByteArray("/3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v+vtfHNrb0Dbq298c2vtUKIr7UDbq+1/3+tveb/rb3/f6+1+Z+vtfO/r7Xs36+15v+vteb/rb3/f6295v/ww+b/8MP/f6+17N+vtfO/r7X5n6+1/3+vtQNurb3xza29A26vtUKIr7XxzfDDFdKtvfHNrb0V0n/ETs7ww/HNvMRa0X/Et9G8xKzO8MPxza29FdKtvfHNf8S30fDDFdK8xKzOf8ROzrzEWtGtveb/8MP/f629/3/ww+b//3+szt7/WtH/f1rR3v+szt7/Ts7/f6zO/39Ozt7/rM7/f7fR3v9a0d7/t9H/f1rR8MP/f3/E5v/ww+b/f8T/f/DD5v9/xP9/8MP/f3/E5v//f+b//3/m//9/5v//f+b/R4Z5mUeG139Hhtd/R4Z5mUeGXeZHhl3mR4av6UeGr+lHhv//R4b//0eGeZnff9d/R4bXf99/eZnff13mR4Zd5keGr+nff6/pR4b//99/////////l/mv6f//r+mX+f//l/ld5v//Xeb//3mZl/l5mZf513///9d/l/mv6Zf5//+X+f//l/mv6Zf5XeaX+V3ml/l5mZf5eZmX+dd/l/nXf/9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m//9/5v//f+b//3/m/w=="),
 "format": 34896613399,
-"index_count": 258,
-"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAAAFAAEABgAFAAAABgAHAAUACAAJAAoACgAJAAsACgALAAwACAANAAkADgANAAgADgAPAA0AEAARABIAEQAQABMAEQATABQAFQAWABcAGAAWABUAFgAYABkAFgAZABoAFgAaABsAHAAdAB4AHQAfAB4AHQAgAB8AIQAdABwAHQAhACIAHQAiACMAHQAjACQAJQAmACcAJgAlACgAJgAoACkAKgArACwAKgAtACsAKwAtAC4ALQAqAC8ALwAqADAALQAvADEAMgAzADQAMgA1ADMAMwA1ADYANQAyADcANwAyADgANQA3ADkAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAATgBRAE8AUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcAWgBbAFwAWgBdAFsAXgBfAGAAYABfAGEAYABhAGIAXgBjAF8AZABjAF4AZABlAGMAZgBnAGgAZgBpAGcAaABqAGYAaABrAGoAbABqAGsAbABrAG0AbgBvAHAAcABxAG4AcAByAHEAbgBzAG8AdABvAHMAdABzAHUAdgB3AHgAdgB5AHcAeAB3AHoAeAB6AHsAewB6AHwAewB8AH0AfgB/AIAAfgCBAH8A"),
+"index_count": 294,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAAAFAAEABgAFAAAABgAHAAUACAAHAAYACAAJAAcACgALAAwACgANAAsADgANAAoADgAPAA0AEAAPAA4AEAARAA8AEgARABAAEgATABEAFAAVABYAFQAUABcAFQAXABgAGQAaABsAHAAaABkAGgAcAB0AGgAdAB4AGgAeAB8AIAAhACIAIQAjACIAIQAkACMAJQAhACAAIQAlACYAIQAmACcAIQAnACgAKQAqACsAKgApACwAKgAsAC0ALgAvADAALgAxAC8ALwAxADIAMQAuADMAMwAuADQAMQAzADUANgA3ADgANgA5ADcANwA5ADoAOQA2ADsAOwA2ADwAOQA7AD0APgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAATgBRAE8AUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcAWgBbAFwAWgBdAFsAXgBdAFoAXgBfAF0AYABfAF4AYABhAF8AYgBhAGAAYgBjAGEAZABlAGYAZABnAGUAZABoAGcAZABpAGgAagBoAGkAagBrAGgAbABrAGoAbABtAGsAbgBvAHAAbgBxAG8AcABvAHIAcAByAHMAdABzAHIAdAByAHUAdAB1AHYAdAB2AHcAeAB5AHoAeAB7AHkAfAB7AHgAfAB9AHsAfgB9AHwAfgB/AH0AgAB/AH4AgACBAH8AggCDAIQAggCFAIMAhgCHAIgAhgCJAIcAigCLAIwAigCNAIsA"),
 "material": SubResource("StandardMaterial3D_ppyta"),
 "name": "wall_2_material",
 "primitive": 3,
 "uv_scale": Vector4(2.0019596, 2.0014935, 0, 0),
-"vertex_count": 130,
-"vertex_data": PackedByteArray("74d292Xm/79osnb3mRn/v++HdveZGf+/aLJ29wAA/7/vh3b3AAD/v2iydvdl5v+/74d29////79osnb3////v++HiAiZGf+/aLKICGXm/7/vh4gIZeb/v2iyiAj///+/74eICP///79osogImRn/v++HiAgAAP+/aLKICAAA/78AADMzmRkAgO+HzMyZGQCA74czM5kZAIAAAMWimRkAgAAAzMyZGQCAAADMzJkZ/z/vh8zMZeb/P++HzMyZGf8/AADMzMxM/z8AAMzM/3//PwAAzMwys/8/AADMzGXm/z8AADMzZeb/v++HMzOZGf+/74czM2Xm/7908jMzZeb/v3TyMzOZGf+/AAAzMzKz/78AADMz/3//vwAAMzPMTP+/AAAzM5kZ/78AAMzMZeYAAO+HMzNl5gAA74fMzGXmAAAAAMWiZeYAAAAAMzNl5gAAdPKRLJkZAADvhzMzmRkAAO+HkSyZGQAA/vudMpkZAAB08jMzmRkAAP//vS2ZGQAA/vsnLZkZAAD//wcymRkAAHTyMzNl5gCA74eRLGXmAIDvhzMzZeYAgP77Jy1l5gCAdPKRLGXmAID//wcyZeYAgP77nTJl5gCA//+9LWXmAIDvh5EsZeb/P3TykSyZGf8/74eRLJkZ/z908pEsZeb/P///BzJl5v+///+9LZkZ/7///70tZeb/v///BzKZGf+//vudMpkZP8P//wcyZeY/w/77nTJl5j/D//8HMpkZP8P++yctZeY/w///vS2ZGT/D/vsnLZkZP8P//70tZeY/w3TyMzOZGUzD/vudMmXmTMN08jMzZeZMw/77nTKZGUzDdPKRLGXmsjz++yctmRmyPHTykSyZGbI8/vsnLWXmsjzvh//////+f2iydvf///5/74d29////n9osv/////+f++HiAj///5/aLIAAP///n/vhwAA///+f2iyiAj///5/74cAAAAA//9osogIAAD//++HiAgAAP//aLIAAAAA///vh///mRn/v2iy//9l5v+/74f//2Xm/79osv//////v++H//////+/aLL//5kZ/7/vh///AAD/v2iy//8AAP+/aLJ292Xm/79osv//////v2iy//9l5v+/aLJ29////79osnb3mRn/v2iy//+ZGf+/aLJ29wAA/79osv//AAD/v2iyiAhl5v+/aLIAAJkZ/79osgAAZeb/v2iyiAj///+/aLIAAP///79osogImRn/v2iyAAAAAP+/aLKICAAA/7/vhwAA////v2iyAABl5v+/74cAAGXm/79osgAA////v2iyAACZGf+/74cAAJkZ/79osgAAAAD/v++HAAAAAP+/74d29wAA//9osv//AAD//++H//8AAP//aLJ29wAA//8AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3////9//3////9/////f////3////9///8AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3/+//9//v//f////3////9/////f////3////9//v//f////3/+//9//v//f////3/+//9/////f/7//3////9//v//f/9/////f////3////9/////f////3//f/9/////f///AAD/fwAA/38AAP9/AAD/f/9/AAD/fwAA/38AAP9/AABur7cXbq+3F26vtxdur7cXSGhuL0hobi9IaG4vSGhuL1LQKWhS0CloUtApaFLQKWjWF1JQ1hdSUNYXUlDWF1JQ/3////9/////f////3////9/////f////3////9///////9/////f////3////9/////f////3////9/////f////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAAAAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/")
+"vertex_count": 142,
+"vertex_data": PackedByteArray("74czM////n+Kt5Es///+f++HkSz///5/ircAAP///n/vhwAA///+f4q3MzP///5/74fMzP///n+Kt8zM///+f++H//////5/irf//////n/vh8zMAAD//4q3//8AAP//74f//wAA//+Kt8zMAAD//++HMzMAAP//irczMwAA///vh5EsAAD//4q3kSwAAP//74cAAAAA//+KtwAAAAD//wAAMzOZGQCA74fMzJkZAIDvhzMzmRkAgAAAxaKZGQCAAADMzJkZAIAAAMzMmRn/P++HzMxl5v8/74fMzJkZ/z8AAMzMzEz/PwAAzMz/f/8/AADMzDKz/z8AAMzMZeb/PwAAMzNl5v+/74czM5kZ/7/vhzMzZeb/v3TyMzNl5v+/dPIzM5kZ/78AADMzMrP/vwAAMzP/f/+/AAAzM8xM/78AADMzmRn/vwAAzMxl5gAA74czM2XmAADvh8zMZeYAAAAAxaJl5gAAAAAzM2XmAAB08pEsmRkAAO+HMzOZGQAA74eRLJkZAAD++50ymRkAAHTyMzOZGQAA//+9LZkZAAD++yctmRkAAP//BzKZGQAAdPIzM2XmAIDvh5EsZeYAgO+HMzNl5gCA/vsnLWXmAIB08pEsZeYAgP//BzJl5gCA/vudMmXmAID//70tZeYAgO+HkSxl5v8/dPKRLJkZ/z/vh5EsmRn/P3TykSxl5v8///8HMmXm/7///70tmRn/v///vS1l5v+///8HMpkZ/7/++50ymRk/w///BzJl5j/D/vudMmXmP8P//wcymRk/w/77Jy1l5j/D//+9LZkZP8P++yctmRk/w///vS1l5j/DdPIzM5kZTMP++50yZeZMw3TyMzNl5kzD/vudMpkZTMN08pEsZeayPP77Jy2ZGbI8dPKRLJkZsjz++yctZeayPO+HAAD///+/ircAANL1/7/vhwAA0vX/v4q3AAD///+/74fMzNL1//+Kt///0vX//++H///S9f//irfMzNL1///vhzMz0vX//4q3MzPS9f//74eRLNL1//+Kt5Es0vX//++HAADS9f//ircAANL1//+Kt8zM0vX/v4q3//////+/irf//9L1/7+Kt8zM////v4q3MzP///+/irczM9L1/7+Kt5Es0vX/v4q3kSz///+/ircAANL1/7+KtwAA////v4q3AAAAAP+/ireRLCwK/7+Kt5EsAAD/v4q3AAAsCv+/irczMywK/7+KtzMzAAD/v4q3zMwAAP+/irfMzCwK/7+Kt///LAr/v4q3//8AAP+/74eRLCwK/n+KtwAALAr+f++HAAAsCv5/ireRLCwK/n/vhzMzLAr+f4q3MzMsCv5/74fMzCwK/n+Kt8zMLAr+f++H//8sCv5/irf//ywK/n/vh///0vX/v4q3//////+/74f//////7+Kt///0vX/v++H//8AAP+/irf//ywK/7/vh///LAr/v4q3//8AAP+/74cAACwK/7+KtwAAAAD/v++HAAAAAP+/ircAACwK/7//f////3////9/////f////3////9/////f////3////9/////f///////f////3////9/////f////3////9/////f////3////9/////f/9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9//v//f/7//3////9/////f////3////9/////f/7//3////9//v//f/7//3////9//v//f////3/+//9/////f/7//3//f////3////9/////f////3////9//3//f////3///wAA/38AAP9/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAAbq+3F26vtxdur7cXbq+3F0hobi9IaG4vSGhuL0hobi9S0CloUtApaFLQKWhS0Clo1hdSUNYXUlDWF1JQ1hdSUAAA/38AAP9/AAD/fwAA/3////9/////f////3////9/////f////3////9/////f////3////9//38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3////9/////f///////f////3////9/////f////3////9/////f////38AAP9/AAD/fwAA/38AAP9/")
 }, {
 "aabb": AABB(-0.059307188, -0.9, -1.2, 0.07391322, 1.8000001, 2.4),
 "attribute_data": PackedByteArray("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"),
@@ -140,139 +146,446 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_vbegm")
 
+[sub_resource type="MultiMesh" id="MultiMesh_xersf"]
+transform_format = 1
+instance_count = 40
+mesh = SubResource("ArrayMesh_ehkex")
+buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -1.499999)
+
+[sub_resource type="MultiMesh" id="MultiMesh_00tp4"]
+transform_format = 1
+instance_count = 5
+mesh = ExtResource("7_5tkv4")
+buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1.499999)
+
+[sub_resource type="MultiMesh" id="MultiMesh_77dp3"]
+transform_format = 1
+instance_count = 6
+mesh = ExtResource("4_xersf")
+buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -1.499999)
+
+[sub_resource type="MultiMesh" id="MultiMesh_5tkv4"]
+transform_format = 1
+instance_count = 10
+mesh = ExtResource("8_0m0f1")
+buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -1.499999)
+
+[sub_resource type="MultiMesh" id="MultiMesh_0m0f1"]
+transform_format = 1
+instance_count = 6
+mesh = ExtResource("5_00tp4")
+buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 18, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -4.499999)
+
+[sub_resource type="MultiMesh" id="MultiMesh_b0q6j"]
+transform_format = 1
+instance_count = 8
+mesh = ExtResource("6_77dp3")
+buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 21, 0, 0, 1, -13.5, 1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 12, 0, 0, 1, -1.499999, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -1.499999)
+
+[sub_resource type="MultiMesh" id="MultiMesh_mhym6"]
+transform_format = 1
+instance_count = 5
+mesh = ExtResource("9_b0q6j")
+buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -4.499999)
+
 [node name="Test" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mhym6")
 
-[node name="Building" type="Node3D" parent="WorldEnvironment"]
+[node name="Building" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.5)
 script = ExtResource("2_6uqi0")
 metadata/_custom_type_script = "uid://dv8wc7eiyx6o1"
 
-[node name="Facade" type="Node3D" parent="WorldEnvironment/Building"]
+[node name="Facade" type="Node3D" parent="Building"]
 script = ExtResource("3_ppyta")
-floors = 6
-columns = 4
+floors = 8
+columns = 5
 style = "art_deco"
-model = "window_02"
-misc_items/shutter = false
+model = "window_03"
+misc_items/shutter = true
 metadata/_custom_type_script = "uid://gqsu0p5lylko"
 
-[node name="column_0_floor_1" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="column_0_floor_1" type="MeshInstance3D" parent="Building/Facade"]
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_0_floor_2" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_0_floor_1"]
+mesh = ExtResource("7_5tkv4")
+metadata/model = "misc/shutter/shutter_02_dirty.res"
+
+[node name="column_0_floor_2" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_0_floor_3" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_0_floor_2"]
+mesh = ExtResource("4_xersf")
+metadata/model = "misc/shutter/shutter_02.res"
+
+[node name="column_0_floor_3" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_0_floor_4" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_0_floor_3"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="column_0_floor_4" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_0_floor_5" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_0_floor_4"]
+mesh = ExtResource("5_00tp4")
+metadata/model = "misc/shutter/shutter_01.res"
+
+[node name="column_0_floor_5" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_0_floor_6" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_0_floor_5"]
+mesh = ExtResource("6_77dp3")
+metadata/model = "misc/shutter/shutter_03_dirty.res"
+
+[node name="column_0_floor_6" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_1_floor_1" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_0_floor_6"]
+mesh = ExtResource("5_00tp4")
+metadata/model = "misc/shutter/shutter_01.res"
+
+[node name="column_0_floor_7" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_0_floor_7"]
+mesh = ExtResource("4_xersf")
+metadata/model = "misc/shutter/shutter_02.res"
+
+[node name="column_0_floor_8" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_0_floor_8"]
+mesh = ExtResource("6_77dp3")
+metadata/model = "misc/shutter/shutter_03_dirty.res"
+
+[node name="column_1_floor_1" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.0000002)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_1_floor_2" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_1_floor_1"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="column_1_floor_2" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3.0000002)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_1_floor_3" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_1_floor_2"]
+mesh = ExtResource("9_b0q6j")
+metadata/model = "misc/shutter/shutter_01_dirty.res"
+
+[node name="column_1_floor_3" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 3.0000002)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_1_floor_4" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_1_floor_3"]
+mesh = ExtResource("4_xersf")
+metadata/model = "misc/shutter/shutter_02.res"
+
+[node name="column_1_floor_4" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 3.0000002)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_1_floor_5" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_1_floor_4"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="column_1_floor_5" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 3.0000002)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_1_floor_6" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_1_floor_5"]
+mesh = ExtResource("6_77dp3")
+metadata/model = "misc/shutter/shutter_03_dirty.res"
+
+[node name="column_1_floor_6" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 3.0000002)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_2_floor_1" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_1_floor_6"]
+mesh = ExtResource("9_b0q6j")
+metadata/model = "misc/shutter/shutter_01_dirty.res"
+
+[node name="column_1_floor_7" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 3.0000002)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_1_floor_7"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="column_1_floor_8" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 3.0000002)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_1_floor_8"]
+mesh = ExtResource("7_5tkv4")
+metadata/model = "misc/shutter/shutter_02_dirty.res"
+
+[node name="column_2_floor_1" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.0000005)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_2_floor_2" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_2_floor_1"]
+mesh = ExtResource("5_00tp4")
+metadata/model = "misc/shutter/shutter_01.res"
+
+[node name="column_2_floor_2" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 6.0000005)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_2_floor_3" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_2_floor_2"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="column_2_floor_3" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 6.0000005)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_2_floor_4" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_2_floor_3"]
+mesh = ExtResource("5_00tp4")
+metadata/model = "misc/shutter/shutter_01.res"
+
+[node name="column_2_floor_4" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 6.0000005)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_2_floor_5" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_2_floor_4"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="column_2_floor_5" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 6.0000005)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_2_floor_6" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_2_floor_5"]
+mesh = ExtResource("6_77dp3")
+metadata/model = "misc/shutter/shutter_03_dirty.res"
+
+[node name="column_2_floor_6" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 6.0000005)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_3_floor_1" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_2_floor_6"]
+mesh = ExtResource("9_b0q6j")
+metadata/model = "misc/shutter/shutter_01_dirty.res"
+
+[node name="column_2_floor_7" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 6.0000005)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_2_floor_7"]
+mesh = ExtResource("7_5tkv4")
+metadata/model = "misc/shutter/shutter_02_dirty.res"
+
+[node name="column_2_floor_8" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 6.0000005)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_2_floor_8"]
+mesh = ExtResource("7_5tkv4")
+metadata/model = "misc/shutter/shutter_02_dirty.res"
+
+[node name="column_3_floor_1" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.000001)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_3_floor_2" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_3_floor_1"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="column_3_floor_2" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 9.000001)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_3_floor_3" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_3_floor_2"]
+mesh = ExtResource("6_77dp3")
+metadata/model = "misc/shutter/shutter_03_dirty.res"
+
+[node name="column_3_floor_3" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 9.000001)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_3_floor_4" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_3_floor_3"]
+mesh = ExtResource("9_b0q6j")
+metadata/model = "misc/shutter/shutter_01_dirty.res"
+
+[node name="column_3_floor_4" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 9.000001)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_3_floor_5" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_3_floor_4"]
+mesh = ExtResource("9_b0q6j")
+metadata/model = "misc/shutter/shutter_01_dirty.res"
+
+[node name="column_3_floor_5" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 9.000001)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
 
-[node name="column_3_floor_6" type="MeshInstance3D" parent="WorldEnvironment/Building/Facade"]
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_3_floor_5"]
+mesh = ExtResource("6_77dp3")
+metadata/model = "misc/shutter/shutter_03_dirty.res"
+
+[node name="column_3_floor_6" type="MeshInstance3D" parent="Building/Facade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 9.000001)
 mesh = SubResource("ArrayMesh_ehkex")
-metadata/model = "Brazil/art_deco/window_02"
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_3_floor_6"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="column_3_floor_7" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 9.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_3_floor_7"]
+mesh = ExtResource("5_00tp4")
+metadata/model = "misc/shutter/shutter_01.res"
+
+[node name="column_3_floor_8" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 9.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_3_floor_8"]
+mesh = ExtResource("5_00tp4")
+metadata/model = "misc/shutter/shutter_01.res"
+
+[node name="column_4_floor_1" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_4_floor_1"]
+mesh = ExtResource("7_5tkv4")
+metadata/model = "misc/shutter/shutter_02_dirty.res"
+
+[node name="column_4_floor_2" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 12.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_4_floor_2"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="column_4_floor_3" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 12.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_4_floor_3"]
+mesh = ExtResource("4_xersf")
+metadata/model = "misc/shutter/shutter_02.res"
+
+[node name="column_4_floor_4" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 12.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_4_floor_4"]
+mesh = ExtResource("4_xersf")
+metadata/model = "misc/shutter/shutter_02.res"
+
+[node name="column_4_floor_5" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 12.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_4_floor_5"]
+mesh = ExtResource("6_77dp3")
+metadata/model = "misc/shutter/shutter_03_dirty.res"
+
+[node name="column_4_floor_6" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 12.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_4_floor_6"]
+mesh = ExtResource("6_77dp3")
+metadata/model = "misc/shutter/shutter_03_dirty.res"
+
+[node name="column_4_floor_7" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 12.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_4_floor_7"]
+mesh = ExtResource("4_xersf")
+metadata/model = "misc/shutter/shutter_02.res"
+
+[node name="column_4_floor_8" type="MeshInstance3D" parent="Building/Facade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 12.000001)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="shutter" type="MeshInstance3D" parent="Building/Facade/column_4_floor_8"]
+mesh = ExtResource("8_0m0f1")
+metadata/model = "misc/shutter/shutter_03.res"
+
+[node name="Building2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="Multimesh_Brazil_art_deco_window_03" type="MultiMeshInstance3D" parent="Building2"]
+multimesh = SubResource("MultiMesh_xersf")
+
+[node name="Multimesh_misc_shutter_shutter_02_dirty_res" type="MultiMeshInstance3D" parent="Building2"]
+multimesh = SubResource("MultiMesh_00tp4")
+
+[node name="Multimesh_misc_shutter_shutter_02_res" type="MultiMeshInstance3D" parent="Building2"]
+multimesh = SubResource("MultiMesh_77dp3")
+
+[node name="Multimesh_misc_shutter_shutter_03_res" type="MultiMeshInstance3D" parent="Building2"]
+multimesh = SubResource("MultiMesh_5tkv4")
+
+[node name="Multimesh_misc_shutter_shutter_01_res" type="MultiMeshInstance3D" parent="Building2"]
+multimesh = SubResource("MultiMesh_0m0f1")
+
+[node name="Multimesh_misc_shutter_shutter_03_dirty_res" type="MultiMeshInstance3D" parent="Building2"]
+multimesh = SubResource("MultiMesh_b0q6j")
+
+[node name="Multimesh_misc_shutter_shutter_01_dirty_res" type="MultiMeshInstance3D" parent="Building2"]
+multimesh = SubResource("MultiMesh_mhym6")
