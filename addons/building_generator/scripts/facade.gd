@@ -50,14 +50,16 @@ var is_building_parent: bool = true
 
 func _set(property: StringName, value) -> bool:
 	var key = property.trim_prefix("misc_items/")
-	if misc_config != null && (property.begins_with("misc_items/") && (misc.is_empty() || misc[property.trim_prefix("misc_items/")] == true)):
-		misc[property.trim_prefix("misc_items/")] = value
+	if property.begins_with("misc_items/") && ((misc != null && misc.is_empty()) || misc[key] == false):
+		misc[key] = value
+		if(misc_config != null):
+			misc_config.sub_configs[key].add_item_as_children(key, self)
+		return true
+	elif property.begins_with("misc_items/") && (misc_config != null && misc.has(key)):
+		misc[key] = value
 		misc_config.sub_configs[key].add_item_as_children(key, self,true)
 		return false
-	elif !misc.is_empty() && (property.begins_with("misc_items/") && misc[property.trim_prefix("misc_items/")] == false):
-		misc[key] = value
-		misc_config.sub_configs[key].add_item_as_children(key, self)
-		return true
+	
 	
 	return false
 
@@ -255,37 +257,41 @@ func remove_columns(n: int):
 func add_floors(floor_count: int):
 	if get_child_count() == 0:
 		floor_count = 1
-	for floor in range(floors, floor_count+1):
-		for col in columns:
-			var name = name_format.format([col,floor])
-			var floor3D = MeshInstance3D.new()
-			floor3D.name = name
-			floor3D.set_mesh(mesh)
-			var height = floor3D.mesh.get_aabb().size.y
-			var width =  floor3D.mesh.get_aabb().size.z
-			floor3D.position = Vector3(0,(floor-1) * height,col * width)
-			var node = get_node_or_null(name)
-			if node == null:
-				add_child(floor3D)
-				if Engine.is_editor_hint():
-					floor3D.owner = get_tree().edited_scene_root
+	if !mesh == null:
+		for floor in range(floors, floor_count+1):
+			for col in columns:
+				var name = name_format.format([col,floor])
+				var floor3D = MeshInstance3D.new()
+				floor3D.name = name
+				floor3D.set_meta("model",country+"/"+style+"/"+model)
+				floor3D.set_mesh(mesh)
+				var height = floor3D.mesh.get_aabb().size.y
+				var width =  floor3D.mesh.get_aabb().size.z
+				floor3D.position = Vector3(0,(floor-1) * height,col * width)
+				var node = get_node_or_null(name)
+				if node == null:
+					add_child(floor3D)
+					if Engine.is_editor_hint():
+						floor3D.owner = get_tree().edited_scene_root
 		
 	notify_property_list_changed()
 		
 func add_columns(col_count: int):
-	for col in range(columns, col_count):
-		for floor in floors:
-			var name = name_format.format([columns,floor+1])
-			var floor3D = MeshInstance3D.new()
-			floor3D.name = name
-			floor3D.set_mesh(mesh)
-			var height = floor3D.mesh.get_aabb().size.y
-			var width =  floor3D.mesh.get_aabb().size.z
-			floor3D.position = Vector3(0,floor * height,col * width)
-			add_child(floor3D)
-			if Engine.is_editor_hint():
-				floor3D.owner = get_tree().edited_scene_root
-			notify_property_list_changed()
+	if !mesh == null:
+		for col in range(columns, col_count):
+			for floor in floors:
+				var name = name_format.format([columns,floor+1])
+				var floor3D = MeshInstance3D.new()
+				floor3D.set_meta("model",country+"/"+style+"/"+model)
+				floor3D.name = name
+				floor3D.set_mesh(mesh)
+				var height = floor3D.mesh.get_aabb().size.y
+				var width =  floor3D.mesh.get_aabb().size.z
+				floor3D.position = Vector3(0,floor * height,col * width)
+				add_child(floor3D)
+				if Engine.is_editor_hint():
+					floor3D.owner = get_tree().edited_scene_root
+				notify_property_list_changed()
 	
 		
 func update_instances():
@@ -294,6 +300,7 @@ func update_instances():
 		if child is MeshInstance3D:
 			var instance3d = child as MeshInstance3D
 			instance3d.set_mesh(mesh)
+			instance3d.set_meta("model",country+"/"+style+"/"+model)
 			child = instance3d
 			
 
