@@ -10,6 +10,7 @@ func export_mesh() -> void:
 	var building_node = Node3D.new()
 	get_parent().add_child(building_node)
 	building_node.name = self.name
+	building_node.global_scale(self.scale)
 	
 	
 	var facades: Array[Facade] = []
@@ -24,7 +25,11 @@ func export_mesh() -> void:
 			if not distinct_objects.has(key):
 				distinct_objects[key] = []
 			distinct_objects[key].append(mesh)
-	
+			for item in mesh.get_children():
+				var key_item = (item as MeshInstance3D).get_meta("model")	
+				if not distinct_objects.has(key_item):
+					distinct_objects[key_item] = []
+				distinct_objects[key_item].append(item)
 	for key in distinct_objects.keys():
 		print(key)
 		var node_group = distinct_objects[key]
