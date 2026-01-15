@@ -34,6 +34,7 @@ func add_item_as_children(model_name: String, facade: Facade, delete: bool = fal
 			var mesh: MeshInstance3D = MeshInstance3D.new()
 			mesh.name = model_name
 			mesh.mesh = load(variant) as ArrayMesh
+			mesh.set_meta("model",variant.trim_prefix("res://addons/building_generator/models/"))
 			mesh.position = vc3pos
 			child.add_child(mesh)
 			if Engine.is_editor_hint():
