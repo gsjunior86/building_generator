@@ -195,6 +195,7 @@ environment = SubResource("Environment_mhym6")
 
 [node name="Building" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.5)
+visible = false
 script = ExtResource("2_6uqi0")
 metadata/_custom_type_script = "uid://dv8wc7eiyx6o1"
 
