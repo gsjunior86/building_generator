@@ -40,7 +40,7 @@ func export_mesh() -> void:
 		multimesh.instance_count = node_group.size()
 		
 		for i in range(node_group.size()):
-			var transform = node_group[i].global_transform
+			var transform = building_node.global_transform.affine_inverse() * node_group[i].global_transform
 			multimesh.set_instance_transform(i, transform)
 		
 		var multimesh_instance = MultiMeshInstance3D.new()
