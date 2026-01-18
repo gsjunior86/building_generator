@@ -35,7 +35,6 @@ func export_mesh() -> void:
 		var node_group = distinct_objects[key]
 		
 		var multimesh = MultiMesh.new()
-		node_group[0].mesh
 		multimesh.mesh = node_group[0].mesh
 		multimesh.transform_format = MultiMesh.TRANSFORM_3D
 		multimesh.instance_count = node_group.size()
