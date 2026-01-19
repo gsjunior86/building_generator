@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://p2ukg3seo7gx"]
+[gd_scene load_steps=32 format=4 uid="uid://p2ukg3seo7gx"]
 
 [ext_resource type="Script" uid="uid://dv8wc7eiyx6o1" path="res://addons/building_generator/scripts/building.gd" id="2_6uqi0"]
 [ext_resource type="Script" uid="uid://gqsu0p5lylko" path="res://addons/building_generator/scripts/facade.gd" id="3_ppyta"]
@@ -188,6 +188,128 @@ instance_count = 5
 mesh = ExtResource("9_b0q6j")
 buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -10.5, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1, -7.4999995, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, -4.499999, 1, 0, 0, 0, 0, 1, 0, 9, 0, 0, 1, -4.499999)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xersf"]
+resource_name = "wall_material"
+cull_mode = 2
+albedo_color = Color(0.89240354, 0.89240354, 0.89240354, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00tp4"]
+resource_name = "shop_doors"
+cull_mode = 2
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77dp3"]
+resource_name = "metal"
+cull_mode = 2
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tkv4"]
+resource_name = "sign"
+cull_mode = 2
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0m0f1"]
+_surfaces = [{
+"aabb": AABB(-0.042843252, -1.5, -3, 0.16784325, 3.5, 6),
+"format": 34896613377,
+"index_count": 66,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAAAFAAEABAAGAAIABAAHAAYACAAGAAcACAAHAAkACgAGAAgACgALAAYADAALAAoADAANAAsADQAOAAsACwAOAA8ACwAPAAAADQAQAA4AAAAPABEAEgAQAA0AEgARABAAAAARABIAEgAFAAAAEgATAAUA"),
+"name": "wall_material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("//9hvbzdAAD//9D6//8AAP//0Pq83QAA////////AAD/////vN0AAP//Yb3//wAA///Q+kIiAAD/////QiIAAP//0PoAAAAA/////wAAAAD//2G9AAAAAP//Yb1CIgAA//8AAAAAAAD//wAAQiIAAAAAYb1CIgAAAABhvbzdAAAAAAAAQiIAAAAAAAC83QAA//8AALzdAAD//wAA//8AAA==")
+}, {
+"aabb": AABB(-0.042843252, -1.5, -2.1970115, 1e-05, 2.5892472, 4.394023),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "shop_doors",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAD/////AAAAAAAAAAAAAAAAAAD//wAAAAD//wAAAAA=")
+}, {
+"aabb": AABB(0.125, 1.0892472, -2.1970112, 0.20457414, 0.8399209, 4.394023),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAAAEAAEAAgADAAUABgAEAAAABQADAAcABgAHAAQABQAHAAYA"),
+"name": "metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP7/AAD//wAAAAAAAAAAAAAAAAAA/////wAAAAD//wAA/v8AAAAA//8AAAAAAAD/////AAD///////8AAA==")
+}, {
+"aabb": AABB(0.32957414, 1.0892472, -2.1970112, 1e-05, 0.8399209, 4.394023),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "sign",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAD/////AAAAAAAAAAAAAAAAAAD+/wAAAAD//wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b0q6j"]
+resource_name = "shop_02_Cube_008"
+_surfaces = [{
+"aabb": AABB(-0.042843252, -1.5, -3, 0.16784325, 3.5, 6),
+"attribute_data": PackedByteArray("WI+QSLOe/z+znpBI/5//P1iP/z//X5BI/1//P/+fkEiznm53/59ud7Oe/3//n/9/WI//f1iPbnf/X/9//19udwAA//8AAP//AAD//wAA//9Yj253WI+QSFiPkEhYj253/19ud1iPbndYj253/19ud1iPkEj/X5BI/1+QSFiPkEg="),
+"format": 34896613399,
+"index_count": 66,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAAAEAAEABQAEAAAABQAGAAQAAgADAAcABwAIAAIABwAJAAgACgAIAAkACgAJAAsADAAIAAoADAANAAgADgANAAwADgAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0A"),
+"material": SubResource("StandardMaterial3D_xersf"),
+"name": "wall_material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("//9hvbzdVNX//9D6//9U1f//0Pq83VTV////////VNX//2G9//9U1f//AAC83VTV//8AAP//VNX/////vN1U1f//0PpCIlTV/////0IiVNX//9D6AABU1f////8AAFTV//9hvQAAVNX//2G9QiJU1f//AAAAAFTV//8AAEIiVNX//wAAvN3/vwAAAABCIv+///8AAEIi/78AAAAAvN3/v///Yb1CIv+/AABhvbzd/7///2G9vN3/vwAAYb1CIv+///8AAEIi/n8AAGG9QiL+f///Yb1CIv5/AAAAAEIi/n///2G9vN3//wAAAAC83f////8AALzd//8AAGG9vN3//6oqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqir///9/////f////3////9/AAD/fwAA/38AAP9/AAD/f/9/////f////3////9///////9/////f////3////9/")
+}, {
+"aabb": AABB(-0.042843252, -1.5, -2.1970115, 1e-05, 2.5892472, 4.394023),
+"attribute_data": PackedByteArray("WI+QSP9fbnf/X5BIWI9udw=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_00tp4"),
+"name": "shop_doors",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAD/////VNUAAAAAAABU1QAAAAD//1TVAAD//wAAVNWqKqoqqiqqKqoqqiqqKqoq")
+}, {
+"aabb": AABB(0.125, 1.0892472, -2.1970112, 0.20457414, 0.8399209, 4.394023),
+"attribute_data": PackedByteArray("WI+QSFiPbndYj253WI+QSFiPbneznm53s55ud1iPbneznpBIWI+QSFiPkEiznpBIs55ud7OekEiznpBIs55udw=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": SubResource("StandardMaterial3D_77dp3"),
+"name": "metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAAP7//7///wAAAAD/vwAAAAAAAP+///8AAP7//78AAAAAAAD///////8AAP//AAD//wAA/////wAAAAD//wAA//////5///8AAP7//n8AAAAA/v/+f/////////5/AAD//wAA/7//////////vwAA//////+//////wAA/78AAP9/AAD/fwAA/38AAP9/////f////3////9/////f/9/////f////3////9///////9/////f////3////9/")
+}, {
+"aabb": AABB(0.32957414, 1.0892472, -2.1970112, 1e-05, 0.8399209, 4.394023),
+"attribute_data": PackedByteArray("G4BQgP7//v8bgP////9QgA=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_5tkv4"),
+"name": "sign",
+"primitive": 3,
+"uv_scale": Vector4(2.000658, 1.9755218, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAD//////78AAAAAAAD/vwAAAAD+//+/AAD//wAA/7//fwAA/38AAP9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_0m0f1")
+
 [node name="Test" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -195,7 +317,6 @@ environment = SubResource("Environment_mhym6")
 
 [node name="Building" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.5)
-visible = false
 script = ExtResource("2_6uqi0")
 metadata/_custom_type_script = "uid://dv8wc7eiyx6o1"
 
@@ -590,3 +711,18 @@ multimesh = SubResource("MultiMesh_b0q6j")
 
 [node name="Multimesh_misc_shutter_shutter_01_dirty_res" type="MultiMeshInstance3D" parent="Building2"]
 multimesh = SubResource("MultiMesh_mhym6")
+
+[node name="Building3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.891287)
+script = ExtResource("2_6uqi0")
+metadata/_custom_type_script = "uid://dv8wc7eiyx6o1"
+
+[node name="Facade" type="Node3D" parent="Building3"]
+script = ExtResource("3_ppyta")
+style = "art_deco"
+model = "shop_02"
+metadata/_custom_type_script = "uid://gqsu0p5lylko"
+
+[node name="column_0_floor_1" type="MeshInstance3D" parent="Building3/Facade"]
+mesh = SubResource("ArrayMesh_b0q6j")
+metadata/model = "Brazil/art_deco/shop_02"
