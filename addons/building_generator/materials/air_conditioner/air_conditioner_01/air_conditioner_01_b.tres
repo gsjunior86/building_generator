@@ -1,6 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bwayovgk5s2wm"]
-
-[ext_resource type="Texture2D" uid="uid://bcr5v78hpvq05" path="res://addons/building_generator/textures/air_conditioner/air_conditioner_01/air_conditioner_01_b.tga" id="1_23qut"]
-
-[resource]
-albedo_texture = ExtResource("1_23qut")
