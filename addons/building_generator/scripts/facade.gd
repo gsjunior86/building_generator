@@ -51,6 +51,8 @@ var is_building_parent: bool = true
 func _set(property: StringName, value) -> bool:
 	if Engine.is_editor_hint():
 		var key = property.trim_prefix("misc_items/")
+		if(value == null):
+			return false		
 		if property.begins_with("misc_items/") && ((misc != null && misc.is_empty()) || (!misc.has(key) || misc[key] == false)):
 			misc[key] = value
 			if(misc_config != null):
