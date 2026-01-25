@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bpaiwjh4xrr3t"
-path="res://.godot/imported/air_conditioner_01.glb-223a092f7b59af009629d830942777b0.scn"
+uid="uid://bfw0nwlv2e4ux"
+path="res://.godot/imported/split_air_conditioner_02.glb-f4e0f8894dd2ca44f12cc47d7a0a3734.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/misc/air_conditioner/air_conditioner_01.glb"
-dest_files=["res://.godot/imported/air_conditioner_01.glb-223a092f7b59af009629d830942777b0.scn"]
+source_file="res://addons/building_generator/models/misc/split_air_conditioner/split_air_conditioner_02.glb"
+dest_files=["res://.godot/imported/split_air_conditioner_02.glb-f4e0f8894dd2ca44f12cc47d7a0a3734.scn"]
 
 [params]
 
@@ -39,31 +39,26 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"air_conditioner_back": {
+"air_conditioner_b": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/air_conditioner/air_conditioner_01.tres",
-"use_external/path": "uid://d2a5rpndgc13i"
+"use_external/fallback_path": "res://addons/building_generator/materials/split_air_conditioner/split_air_conditioner_02/air_conditioner_02_b.tres",
+"use_external/path": "uid://dgnqjwedis7g5"
 },
-"air_conditioner_side": {
+"air_conditioner_s": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://addons/building_generator/materials/split_air_conditioner/split_air_conditioner_01/air_conditioner_01_s.tres",
 "use_external/path": "uid://dpo3r6wte486w"
-},
-"metal": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/misc/chrome_metal.tres",
-"use_external/path": "uid://42qnm414layv"
 }
 },
 "meshes": {
-"air_conditioner_01_Cube_027": {
+"split_air_conditioner_02_Mesh_0": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/misc/air_conditioner/air_conditioner_01.res",
-"save_to_file/path": "uid://c6pque3qbut0x"
+"save_to_file/fallback_path": "res://addons/building_generator/models/misc/split_air_conditioner/split_air_conditioner_02.res",
+"save_to_file/path": "uid://bxfef5r2x8f6c"
 }
 }
 }

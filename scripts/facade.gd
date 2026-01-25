@@ -49,16 +49,17 @@ var misc_config: MiscConfig = null
 var is_building_parent: bool = true
 
 func _set(property: StringName, value) -> bool:
-	var key = property.trim_prefix("misc_items/")
-	if property.begins_with("misc_items/") && ((misc != null && misc.is_empty()) || misc[key] == false):
-		misc[key] = value
-		if(misc_config != null):
-			misc_config.sub_configs[key].add_item_as_children(key, self)
-		return true
-	elif property.begins_with("misc_items/") && (misc_config != null && misc.has(key)):
-		misc[key] = value
-		misc_config.sub_configs[key].add_item_as_children(key, self,true)
-		return false
+	if Engine.is_editor_hint():
+		var key = property.trim_prefix("misc_items/")
+		if property.begins_with("misc_items/") && ((misc != null && misc.is_empty()) || (!misc.has(key) || misc[key] == false)):
+			misc[key] = value
+			if(misc_config != null):
+				misc_config.sub_configs[key].add_item_as_children(key, self)
+			return true
+		elif property.begins_with("misc_items/") && (misc_config != null && misc.has(key)):
+			misc[key] = value
+			misc_config.sub_configs[key].add_item_as_children(key, self,true)
+			return false
 	
 	
 	return false

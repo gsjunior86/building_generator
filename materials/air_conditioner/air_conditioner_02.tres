@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://vxqqh0dvtvos"]
+
+[ext_resource type="Texture2D" uid="uid://bed3b700x6uuv" path="res://addons/building_generator/textures/air_conditioner/back_air_conditioner/back_02.tga" id="1_snbxw"]
+
+[resource]
+albedo_texture = ExtResource("1_snbxw")
