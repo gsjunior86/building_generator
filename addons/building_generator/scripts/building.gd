@@ -3,13 +3,16 @@ extends Node3D
 
 class_name Building
 
-var dock
+@export_group("Visibility Range")
+@export_range(0,1000) var end: int = 150
+@export_range(0,1000) var end_margin: int = 140
 
 func export_mesh() -> void:
 	
 	var building_node = Node3D.new()
 	get_parent().add_child(building_node)
 	building_node.name = self.name
+	building_node.global_transform = global_transform
 	building_node.global_scale(self.scale)
 	
 	
@@ -45,6 +48,9 @@ func export_mesh() -> void:
 		
 		var multimesh_instance = MultiMeshInstance3D.new()
 		multimesh_instance.multimesh = multimesh
+		multimesh_instance.visibility_range_end = end
+		multimesh_instance.visibility_range_end_margin = end_margin
+		multimesh_instance.visibility_range_fade_mode = 1
 		multimesh_instance.name = "Multimesh_" + key
 		building_node.add_child(multimesh_instance)
 		if Engine.is_editor_hint():
