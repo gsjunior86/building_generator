@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=4 uid="uid://p2ukg3seo7gx"]
+[gd_scene load_steps=16 format=4 uid="uid://p2ukg3seo7gx"]
 
 [ext_resource type="Script" uid="uid://dv8wc7eiyx6o1" path="res://addons/building_generator/scripts/building.gd" id="2_6uqi0"]
 [ext_resource type="Script" uid="uid://gqsu0p5lylko" path="res://addons/building_generator/scripts/facade.gd" id="3_ppyta"]
-[ext_resource type="ArrayMesh" uid="uid://baamjc8nckilb" path="res://addons/building_generator/models/Brazil/art_deco/window_03/window_03.res" id="4_ppyta"]
 [ext_resource type="Texture2D" uid="uid://dyd82bbp8o2l8" path="res://addons/building_generator/textures/hdri/citrus_orchard_puresky_4k.exr" id="12_5tkv4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0m0f1"]
@@ -16,8 +15,6 @@ sky_material = SubResource("PanoramaSkyMaterial_0m0f1")
 background_mode = 2
 sky = SubResource("Sky_b0q6j")
 tonemap_mode = 4
-ssao_enabled = true
-ssil_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uqi0"]
 resource_name = "wall_material"
@@ -141,16 +138,31 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_vbegm")
 
+[sub_resource type="MultiMesh" id="MultiMesh_6uqi0"]
+transform_format = 1
+instance_count = 18
+mesh = SubResource("ArrayMesh_ehkex")
+buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 3, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, 3, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, 3, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 6.0000005, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1, 6.0000005, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1, 6.0000005, -4.371139e-08, 0, -1, -1.344182, 0, 1, 0, 0, 1, 0, -4.371139e-08, 7.3132553, -4.371139e-08, 0, -1, -1.344182, 0, 1, 0, 3, 1, 0, -4.371139e-08, 7.3132553, -4.371139e-08, 0, -1, -1.344182, 0, 1, 0, 6, 1, 0, -4.371139e-08, 7.3132553, -4.371139e-08, 0, -1, -4.344182, 0, 1, 0, 0, 1, 0, -4.371139e-08, 7.3132553, -4.371139e-08, 0, -1, -4.344182, 0, 1, 0, 3, 1, 0, -4.371139e-08, 7.3132553, -4.371139e-08, 0, -1, -4.344182, 0, 1, 0, 6, 1, 0, -4.371139e-08, 7.3132553, -4.371139e-08, 0, -1, -7.3441825, 0, 1, 0, 0, 1, 0, -4.371139e-08, 7.3132553, -4.371139e-08, 0, -1, -7.3441825, 0, 1, 0, 3, 1, 0, -4.371139e-08, 7.3132553, -4.371139e-08, 0, -1, -7.3441825, 0, 1, 0, 6, 1, 0, -4.371139e-08, 7.3132553)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ppyta"]
+size = Vector3(9.101665, 9, 9.070738)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ykrsh"]
+size = Vector3(9.101665, 9, 9.070738)
+
 [node name="Test" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mhym6")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.8716032, -0.3751387, 0.31556103, -0.042988878, 0.5827513, 0.8115128, -0.48832345, -0.72088283, 0.49180114, 0, 0, 0)
+shadow_enabled = true
+
 [node name="Building2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.317028, 0, 18.206985)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.317028, 0, 1.1615143)
+visible = false
 script = ExtResource("2_6uqi0")
-end = 100
-end_margin = 150
 metadata/_custom_type_script = "uid://dv8wc7eiyx6o1"
 
 [node name="Facade" type="Node3D" parent="Building2"]
@@ -209,5 +221,81 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 6.0000005)
 mesh = SubResource("ArrayMesh_ehkex")
 metadata/model = "Brazil/art_deco/window_03"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = ExtResource("4_ppyta")
+[node name="Facade2" type="Node3D" parent="Building2"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.344182, 0, 7.3132553)
+script = ExtResource("3_ppyta")
+floors = 3
+columns = 3
+style = "art_deco"
+model = "window_03"
+misc_items/shutter = false
+misc_items/air_conditioner = false
+misc_items/split_air_conditioner = false
+metadata/_custom_type_script = "uid://gqsu0p5lylko"
+
+[node name="column_0_floor_1" type="MeshInstance3D" parent="Building2/Facade2"]
+lod_bias = 0.001
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="column_0_floor_2" type="MeshInstance3D" parent="Building2/Facade2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="column_0_floor_3" type="MeshInstance3D" parent="Building2/Facade2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="column_1_floor_1" type="MeshInstance3D" parent="Building2/Facade2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.0000002)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="column_1_floor_2" type="MeshInstance3D" parent="Building2/Facade2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3.0000002)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="column_1_floor_3" type="MeshInstance3D" parent="Building2/Facade2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 3.0000002)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="column_2_floor_1" type="MeshInstance3D" parent="Building2/Facade2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.0000005)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="column_2_floor_2" type="MeshInstance3D" parent="Building2/Facade2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 6.0000005)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="column_2_floor_3" type="MeshInstance3D" parent="Building2/Facade2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 6.0000005)
+mesh = SubResource("ArrayMesh_ehkex")
+metadata/model = "Brazil/art_deco/window_03"
+
+[node name="Building3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.317028, 0, 1.1615143)
+
+[node name="Multimesh_Brazil_art_deco_window_03" type="MultiMeshInstance3D" parent="Building3"]
+visibility_range_end = 150.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
+multimesh = SubResource("MultiMesh_6uqi0")
+
+[node name="lod_box" type="MeshInstance3D" parent="Building3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2933507, 2.9999998, 3.035369)
+visibility_range_begin = 150.0
+visibility_range_begin_margin = 5.0
+visibility_range_fade_mode = 1
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="staticBody3d" type="StaticBody3D" parent="Building3"]
+
+[node name="collision" type="CollisionShape3D" parent="Building3/staticBody3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2933507, 2.9999998, 3.035369)
+shape = SubResource("BoxShape3D_ykrsh")
