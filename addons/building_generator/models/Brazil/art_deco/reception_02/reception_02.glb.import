@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cyhc1ng01phh3"
-path="res://.godot/imported/balcony_04.glb-c7a0f7f78da375922164f52226ef8de5.scn"
+uid="uid://bffwvqghswi8g"
+path="res://.godot/imported/reception_02.glb-32137a20998e50115f38186cf17d4bed.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/balcony_04/balcony_04.glb"
-dest_files=["res://.godot/imported/balcony_04.glb-c7a0f7f78da375922164f52226ef8de5.scn"]
+source_file="res://addons/building_generator/models/Brazil/art_deco/reception_02/reception_02.glb"
+dest_files=["res://.godot/imported/reception_02.glb-32137a20998e50115f38186cf17d4bed.scn"]
 
 [params]
 
@@ -39,14 +39,14 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "meshes": {
-"balcony_04_Cube_023": {
+"reception_02_Cube_031": {
 "generate/lightmap_uv": 0,
-"generate/lods": 1,
+"generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/balcony_04/balcony_04.res",
-"save_to_file/path": "uid://bx7laomy8rimb"
+"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/reception_02/reception_02.res",
+"save_to_file/path": "uid://g38uuddafqtm"
 }
 }
 }
