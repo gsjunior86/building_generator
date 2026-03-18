@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b10mr6brax7u8"
-path="res://.godot/imported/building.png-bd5c8f1cc1ab5e602dfbbd2747bdc0f0.ctex"
+path="res://.godot/imported/building.png-4346cda94b49c2ac93be00b125b681ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/building_generator/building.png"
-dest_files=["res://.godot/imported/building.png-bd5c8f1cc1ab5e602dfbbd2747bdc0f0.ctex"]
+source_file="res://building.png"
+dest_files=["res://.godot/imported/building.png-4346cda94b49c2ac93be00b125b681ed.ctex"]
 
 [params]
 

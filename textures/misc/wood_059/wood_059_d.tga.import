@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://oj38lcit20iq"
-path.s3tc="res://.godot/imported/wood_059_d.tga-45e11c1df0db7877f2c44144134786b2.s3tc.ctex"
+path.s3tc="res://.godot/imported/wood_059_d.tga-778526e675d946b9144bc3c232df7de9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/building_generator/textures/misc/wood_059/wood_059_d.tga"
-dest_files=["res://.godot/imported/wood_059_d.tga-45e11c1df0db7877f2c44144134786b2.s3tc.ctex"]
+source_file="res://textures/misc/wood_059/wood_059_d.tga"
+dest_files=["res://.godot/imported/wood_059_d.tga-778526e675d946b9144bc3c232df7de9.s3tc.ctex"]
 
 [params]
 

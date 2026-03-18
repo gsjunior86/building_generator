@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bo4v8ubl8pumn"
-path="res://.godot/imported/air_conditioner_02.glb-61218b7f762dc09570418faf0bc3400d.scn"
+path="res://.godot/imported/air_conditioner_02.glb-d055ce1b4f4612ee227c36e35eebd49c.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/misc/air_conditioner/air_conditioner_02.glb"
-dest_files=["res://.godot/imported/air_conditioner_02.glb-61218b7f762dc09570418faf0bc3400d.scn"]
+source_file="res://models/misc/air_conditioner/air_conditioner_02.glb"
+dest_files=["res://.godot/imported/air_conditioner_02.glb-d055ce1b4f4612ee227c36e35eebd49c.scn"]
 
 [params]
 
@@ -41,17 +41,17 @@ _subresources={
 "materials": {
 "air_conditioner_back": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/air_conditioner/air_conditioner_02.tres",
+"use_external/fallback_path": "res://materials/air_conditioner/air_conditioner_02.tres",
 "use_external/path": "uid://vxqqh0dvtvos"
 },
 "air_conditioner_side": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/split_air_conditioner/split_air_conditioner_01/air_conditioner_01_s.tres",
+"use_external/fallback_path": "res://materials/split_air_conditioner/split_air_conditioner_01/air_conditioner_01_s.tres",
 "use_external/path": "uid://dpo3r6wte486w"
 },
 "metal": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/misc/chrome_metal.tres",
+"use_external/fallback_path": "res://materials/misc/chrome_metal.tres",
 "use_external/path": "uid://42qnm414layv"
 }
 },
@@ -62,7 +62,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/misc/air_conditioner/air_conditioner_02.res",
+"save_to_file/fallback_path": "res://models/misc/air_conditioner/air_conditioner_02.res",
 "save_to_file/path": "uid://lgc1q0wwfo4a"
 }
 }

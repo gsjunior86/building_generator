@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwhcamfrb6u33"
-path.s3tc="res://.godot/imported/entrance_01_normal.tga-e706957444d8a41ef7ffce0522ac54de.s3tc.ctex"
+path.s3tc="res://.godot/imported/entrance_01_normal.tga-24f1ba782494c512fd50f30e255332d9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/building_generator/textures/buildings/brazil/art_deco/entrance_01/entrance_01_normal.tga"
-dest_files=["res://.godot/imported/entrance_01_normal.tga-e706957444d8a41ef7ffce0522ac54de.s3tc.ctex"]
+source_file="res://textures/buildings/brazil/art_deco/entrance_01/entrance_01_normal.tga"
+dest_files=["res://.godot/imported/entrance_01_normal.tga-24f1ba782494c512fd50f30e255332d9.s3tc.ctex"]
 
 [params]
 

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cxocepujx8f36"
-path="res://.godot/imported/entrance_01.glb-119a55cd10f81f6a18c7d8a52af8a0f3.scn"
+path="res://.godot/imported/entrance_01.glb-f44923d5aee7ae817573933fc16b410e.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/entrance_01/entrance_01.glb"
-dest_files=["res://.godot/imported/entrance_01.glb-119a55cd10f81f6a18c7d8a52af8a0f3.scn"]
+source_file="res://models/Brazil/art_deco/entrance_01/entrance_01.glb"
+dest_files=["res://.godot/imported/entrance_01.glb-f44923d5aee7ae817573933fc16b410e.scn"]
 
 [params]
 
@@ -41,7 +41,7 @@ _subresources={
 "materials": {
 "entrance": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/buildings/brazil/art_deco/entrance_01.tres",
+"use_external/fallback_path": "res://materials/buildings/brazil/art_deco/entrance_01.tres",
 "use_external/path": "uid://dd0lh6mpg8t8i"
 }
 },
@@ -52,7 +52,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/entrance_01/entrance_01.res",
+"save_to_file/fallback_path": "res://models/Brazil/art_deco/entrance_01/entrance_01.res",
 "save_to_file/path": "uid://dd0ov2clv2dqh"
 }
 }

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mbjhpi7vfarb"
-path.s3tc="res://.godot/imported/floor_window_01_d.tga-aab35e196a19fb9d30b7921b7ed82c0f.s3tc.ctex"
+path.s3tc="res://.godot/imported/floor_window_01_d.tga-6c2a4749723d4b310c15923747f73815.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/building_generator/textures/buildings/brazil/art_deco/floor_window_01/floor_window_01_d.tga"
-dest_files=["res://.godot/imported/floor_window_01_d.tga-aab35e196a19fb9d30b7921b7ed82c0f.s3tc.ctex"]
+source_file="res://textures/buildings/brazil/art_deco/floor_window_01/floor_window_01_d.tga"
+dest_files=["res://.godot/imported/floor_window_01_d.tga-6c2a4749723d4b310c15923747f73815.s3tc.ctex"]
 
 [params]
 

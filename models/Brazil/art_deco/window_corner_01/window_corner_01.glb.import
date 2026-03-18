@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bwx1akvnargnp"
-path="res://.godot/imported/window_corner_01.glb-7a19be59c359a3c341a63f1c5f097712.scn"
+path="res://.godot/imported/window_corner_01.glb-e600acf7e34c7bd2f99b01bd995ecf22.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/window_corner_01/window_corner_01.glb"
-dest_files=["res://.godot/imported/window_corner_01.glb-7a19be59c359a3c341a63f1c5f097712.scn"]
+source_file="res://models/Brazil/art_deco/window_corner_01/window_corner_01.glb"
+dest_files=["res://.godot/imported/window_corner_01.glb-e600acf7e34c7bd2f99b01bd995ecf22.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/window_corner_01/window_corner_01.res",
+"save_to_file/fallback_path": "res://models/Brazil/art_deco/window_corner_01/window_corner_01.res",
 "save_to_file/path": "uid://duv61s5yvyj1f"
 }
 }

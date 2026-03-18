@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gdeojb2i2fkr"
-path.s3tc="res://.godot/imported/shutter_normal.tga-ef95f563dcbdd16d2eb3c334a412f964.s3tc.ctex"
+path.s3tc="res://.godot/imported/shutter_normal.tga-35df1aca288c80dccd8bb3f59b855885.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/building_generator/textures/shutter/shutter_normal.tga"
-dest_files=["res://.godot/imported/shutter_normal.tga-ef95f563dcbdd16d2eb3c334a412f964.s3tc.ctex"]
+source_file="res://textures/shutter/shutter_normal.tga"
+dest_files=["res://.godot/imported/shutter_normal.tga-35df1aca288c80dccd8bb3f59b855885.s3tc.ctex"]
 
 [params]
 

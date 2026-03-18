@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ca7g1xt6db82y"
-path="res://.godot/imported/air_conditioner_03.glb-db7cd72a7d219cc352864113f54e6bf2.scn"
+path="res://.godot/imported/air_conditioner_03.glb-fbce3af63ce53dc6f656f84f4f9744be.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/misc/air_conditioner/air_conditioner_03.glb"
-dest_files=["res://.godot/imported/air_conditioner_03.glb-db7cd72a7d219cc352864113f54e6bf2.scn"]
+source_file="res://models/misc/air_conditioner/air_conditioner_03.glb"
+dest_files=["res://.godot/imported/air_conditioner_03.glb-fbce3af63ce53dc6f656f84f4f9744be.scn"]
 
 [params]
 
@@ -41,12 +41,12 @@ _subresources={
 "materials": {
 "metal": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/misc/chrome_metal.tres",
+"use_external/fallback_path": "res://materials/misc/chrome_metal.tres",
 "use_external/path": "uid://42qnm414layv"
 },
 "wood": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/misc/wood_059.tres",
+"use_external/fallback_path": "res://materials/misc/wood_059.tres",
 "use_external/path": "uid://6e48jlq5noop"
 }
 },
@@ -57,7 +57,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/misc/air_conditioner/air_conditioner_03.res",
+"save_to_file/fallback_path": "res://models/misc/air_conditioner/air_conditioner_03.res",
 "save_to_file/path": "uid://bwxthl801epvc"
 }
 }

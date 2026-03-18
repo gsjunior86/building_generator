@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c2q3b6x510i0c"
-path="res://.godot/imported/balcony_01.glb-4e6a6890c584077d20defcd09ea5dba0.scn"
+path="res://.godot/imported/balcony_01.glb-608f257cc47cbd49a20b8ef3ff828ada.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/balcony_01/balcony_01.glb"
-dest_files=["res://.godot/imported/balcony_01.glb-4e6a6890c584077d20defcd09ea5dba0.scn"]
+source_file="res://models/Brazil/art_deco/balcony_01/balcony_01.glb"
+dest_files=["res://.godot/imported/balcony_01.glb-608f257cc47cbd49a20b8ef3ff828ada.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/balcony_01/balcony_01.res",
+"save_to_file/fallback_path": "res://models/Brazil/art_deco/balcony_01/balcony_01.res",
 "save_to_file/path": "uid://c36v5gtgb354i"
 }
 }

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bfw0nwlv2e4ux"
-path="res://.godot/imported/split_air_conditioner_02.glb-f4e0f8894dd2ca44f12cc47d7a0a3734.scn"
+path="res://.godot/imported/split_air_conditioner_02.glb-e003d4ca80b3551ca24481fff147ab80.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/misc/split_air_conditioner/split_air_conditioner_02.glb"
-dest_files=["res://.godot/imported/split_air_conditioner_02.glb-f4e0f8894dd2ca44f12cc47d7a0a3734.scn"]
+source_file="res://models/misc/split_air_conditioner/split_air_conditioner_02.glb"
+dest_files=["res://.godot/imported/split_air_conditioner_02.glb-e003d4ca80b3551ca24481fff147ab80.scn"]
 
 [params]
 
@@ -41,12 +41,12 @@ _subresources={
 "materials": {
 "air_conditioner_b": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/split_air_conditioner/split_air_conditioner_02/air_conditioner_02_b.tres",
+"use_external/fallback_path": "res://materials/split_air_conditioner/split_air_conditioner_02/air_conditioner_02_b.tres",
 "use_external/path": "uid://dgnqjwedis7g5"
 },
 "air_conditioner_s": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/split_air_conditioner/split_air_conditioner_01/air_conditioner_01_s.tres",
+"use_external/fallback_path": "res://materials/split_air_conditioner/split_air_conditioner_01/air_conditioner_01_s.tres",
 "use_external/path": "uid://dpo3r6wte486w"
 }
 },
@@ -57,7 +57,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/misc/split_air_conditioner/split_air_conditioner_02.res",
+"save_to_file/fallback_path": "res://models/misc/split_air_conditioner/split_air_conditioner_02.res",
 "save_to_file/path": "uid://bxfef5r2x8f6c"
 }
 }

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cdqpuwykgtc53"
-path="res://.godot/imported/wall_side.glb-91b5ccad5b75b973044c3240b5c06bf2.scn"
+path="res://.godot/imported/wall_side.glb-59beb967e1ec7a0e0875471bab11eb30.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/wall_side/wall_side.glb"
-dest_files=["res://.godot/imported/wall_side.glb-91b5ccad5b75b973044c3240b5c06bf2.scn"]
+source_file="res://models/Brazil/art_deco/wall_side/wall_side.glb"
+dest_files=["res://.godot/imported/wall_side.glb-59beb967e1ec7a0e0875471bab11eb30.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/wall_side/wall_side.res",
+"save_to_file/fallback_path": "res://models/Brazil/art_deco/wall_side/wall_side.res",
 "save_to_file/path": "uid://cnb5rpvfriehg"
 }
 }

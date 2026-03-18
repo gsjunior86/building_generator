@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bl21tfcorhtih"
-path="res://.godot/imported/facade.png-96de3eeab2852761917f0eff26223af4.ctex"
+path="res://.godot/imported/facade.png-5f8590f817abc731a521f457afe58bb6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/building_generator/facade.png"
-dest_files=["res://.godot/imported/facade.png-96de3eeab2852761917f0eff26223af4.ctex"]
+source_file="res://facade.png"
+dest_files=["res://.godot/imported/facade.png-5f8590f817abc731a521f457afe58bb6.ctex"]
 
 [params]
 

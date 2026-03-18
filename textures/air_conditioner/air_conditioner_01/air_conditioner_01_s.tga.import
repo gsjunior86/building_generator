@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpag2x5f364wi"
-path.s3tc="res://.godot/imported/air_conditioner_01_s.tga-cedbc2575de5d8fe69dec98003f1e245.s3tc.ctex"
+path.s3tc="res://.godot/imported/air_conditioner_01_s.tga-acebef70b7bf6e23fd7da32c915d0f42.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/building_generator/textures/air_conditioner/air_conditioner_01/air_conditioner_01_s.tga"
-dest_files=["res://.godot/imported/air_conditioner_01_s.tga-cedbc2575de5d8fe69dec98003f1e245.s3tc.ctex"]
+source_file="res://textures/air_conditioner/air_conditioner_01/air_conditioner_01_s.tga"
+dest_files=["res://.godot/imported/air_conditioner_01_s.tga-acebef70b7bf6e23fd7da32c915d0f42.s3tc.ctex"]
 
 [params]
 

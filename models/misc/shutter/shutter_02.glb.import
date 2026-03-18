@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://mgs6wolg52ia"
-path="res://.godot/imported/shutter_02.glb-023362657fb6112ae97dd627ecc96d09.scn"
+path="res://.godot/imported/shutter_02.glb-e59aba56e71f18f4c574a4bc582611a1.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/misc/shutter/shutter_02.glb"
-dest_files=["res://.godot/imported/shutter_02.glb-023362657fb6112ae97dd627ecc96d09.scn"]
+source_file="res://models/misc/shutter/shutter_02.glb"
+dest_files=["res://.godot/imported/shutter_02.glb-e59aba56e71f18f4c574a4bc582611a1.scn"]
 
 [params]
 
@@ -41,12 +41,12 @@ _subresources={
 "materials": {
 "metal": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/misc/chrome_metal.tres",
+"use_external/fallback_path": "res://materials/misc/chrome_metal.tres",
 "use_external/path": "uid://42qnm414layv"
 },
 "shutter": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/shutter/shutter.tres",
+"use_external/fallback_path": "res://materials/shutter/shutter.tres",
 "use_external/path": "uid://c4pcfojevdh8n"
 }
 },
@@ -57,7 +57,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/misc/shutter/shutter_02.res",
+"save_to_file/fallback_path": "res://models/misc/shutter/shutter_02.res",
 "save_to_file/path": "uid://d4h6h61k2li07"
 }
 }

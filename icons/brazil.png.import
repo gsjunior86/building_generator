@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7s4ilnveo4fs"
-path="res://.godot/imported/brazil.png-d32780ef00abea323706767b16eed84a.ctex"
+path="res://.godot/imported/brazil.png-160cbef53469514ff03b0a63819e3a05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/building_generator/icons/brazil.png"
-dest_files=["res://.godot/imported/brazil.png-d32780ef00abea323706767b16eed84a.ctex"]
+source_file="res://icons/brazil.png"
+dest_files=["res://.godot/imported/brazil.png-160cbef53469514ff03b0a63819e3a05.ctex"]
 
 [params]
 

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bmrehs7h3qlxs"
-path="res://.godot/imported/garage_01.glb-26308a18231c7859c4c4d58a6a2541f6.scn"
+path="res://.godot/imported/garage_01.glb-a47e4c93e357e7815d982b220d7bdc18.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/garage_01/garage_01.glb"
-dest_files=["res://.godot/imported/garage_01.glb-26308a18231c7859c4c4d58a6a2541f6.scn"]
+source_file="res://models/Brazil/art_deco/garage_01/garage_01.glb"
+dest_files=["res://.godot/imported/garage_01.glb-a47e4c93e357e7815d982b220d7bdc18.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/garage_01/garage_01.res",
+"save_to_file/fallback_path": "res://models/Brazil/art_deco/garage_01/garage_01.res",
 "save_to_file/path": "uid://d0ge4xl5srhfa"
 }
 }

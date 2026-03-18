@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://brwhq3v1mibmj"
-path="res://.godot/imported/fenster_01.glb-39a6be4a2bf5047363d1f3a6e88bdaa8.scn"
+path="res://.godot/imported/fenster_01.glb-f045c438ae8c9c32377c33488ebb7128.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Germany/zuckerbackerstill/fenster_01/fenster_01.glb"
-dest_files=["res://.godot/imported/fenster_01.glb-39a6be4a2bf5047363d1f3a6e88bdaa8.scn"]
+source_file="res://models/Germany/zuckerbackerstill/fenster_01/fenster_01.glb"
+dest_files=["res://.godot/imported/fenster_01.glb-f045c438ae8c9c32377c33488ebb7128.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Germany/zuckerbackerstill/fenster_01/fenster_01.res",
+"save_to_file/fallback_path": "res://models/Germany/zuckerbackerstill/fenster_01/fenster_01.res",
 "save_to_file/path": "uid://bch2k83hwfji1"
 }
 }

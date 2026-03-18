@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://db0i5ehxeuujb"
-path="res://.godot/imported/window_03.glb-4f08c625c50da0fe2a1a4997a5c2d5d3.scn"
+path="res://.godot/imported/window_03.glb-25301c47547f1f2dd07213999a648267.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/window_03/window_03.glb"
-dest_files=["res://.godot/imported/window_03.glb-4f08c625c50da0fe2a1a4997a5c2d5d3.scn"]
+source_file="res://models/Brazil/art_deco/window_03/window_03.glb"
+dest_files=["res://.godot/imported/window_03.glb-25301c47547f1f2dd07213999a648267.scn"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtqo84sm65tls"
-path.s3tc="res://.godot/imported/shop_01_d.tga-c771082eb7e2ea46f27c18b3ad97d49c.s3tc.ctex"
+path.s3tc="res://.godot/imported/shop_01_d.tga-ae744678c82ba25fa8a2f4e6d17935f2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/building_generator/textures/buildings/brazil/art_deco/shop_01/shop_01_d.tga"
-dest_files=["res://.godot/imported/shop_01_d.tga-c771082eb7e2ea46f27c18b3ad97d49c.s3tc.ctex"]
+source_file="res://textures/buildings/brazil/art_deco/shop_01/shop_01_d.tga"
+dest_files=["res://.godot/imported/shop_01_d.tga-ae744678c82ba25fa8a2f4e6d17935f2.s3tc.ctex"]
 
 [params]
 

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dk5ybtpyd1spb"
-path="res://.godot/imported/reception_01.glb-6355ff22521ae4258507030985f28bb4.scn"
+path="res://.godot/imported/reception_01.glb-917a58972a67c828f485fd3dc3b6aea6.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/reception_01/reception_01.glb"
-dest_files=["res://.godot/imported/reception_01.glb-6355ff22521ae4258507030985f28bb4.scn"]
+source_file="res://models/Brazil/art_deco/reception_01/reception_01.glb"
+dest_files=["res://.godot/imported/reception_01.glb-917a58972a67c828f485fd3dc3b6aea6.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/reception_01/reception_01.res",
+"save_to_file/fallback_path": "res://models/Brazil/art_deco/reception_01/reception_01.res",
 "save_to_file/path": "uid://bmy7ufyptxmo3"
 }
 }

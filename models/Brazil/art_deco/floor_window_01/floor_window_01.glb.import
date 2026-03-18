@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cpnnpe45kfgxp"
-path="res://.godot/imported/floor_window_01.glb-c99a68be7131af7d9ba91cde79ed0e75.scn"
+path="res://.godot/imported/floor_window_01.glb-68d56e9894a3649d985ea3bc1670390f.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/floor_window_01/floor_window_01.glb"
-dest_files=["res://.godot/imported/floor_window_01.glb-c99a68be7131af7d9ba91cde79ed0e75.scn"]
+source_file="res://models/Brazil/art_deco/floor_window_01/floor_window_01.glb"
+dest_files=["res://.godot/imported/floor_window_01.glb-68d56e9894a3649d985ea3bc1670390f.scn"]
 
 [params]
 
@@ -41,7 +41,7 @@ _subresources={
 "materials": {
 "floor_window": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://addons/building_generator/materials/buildings/brazil/art_deco/floor_window_01.tres",
+"use_external/fallback_path": "res://materials/buildings/brazil/art_deco/floor_window_01.tres",
 "use_external/path": "uid://b723oy6v3iadi"
 }
 },
@@ -52,7 +52,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/floor_window_01/floor_window_01.res",
+"save_to_file/fallback_path": "res://models/Brazil/art_deco/floor_window_01/floor_window_01.res",
 "save_to_file/path": "uid://dwrshearuhk5x"
 }
 }

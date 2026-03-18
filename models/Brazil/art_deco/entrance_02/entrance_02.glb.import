@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dq37bd80w3jof"
-path="res://.godot/imported/entrance_02.glb-b5da4df5f28bb47f5c34bb26ed3237a2.scn"
+path="res://.godot/imported/entrance_02.glb-9c7a920317af0c93fa2591ce66127f41.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/entrance_02/entrance_02.glb"
-dest_files=["res://.godot/imported/entrance_02.glb-b5da4df5f28bb47f5c34bb26ed3237a2.scn"]
+source_file="res://models/Brazil/art_deco/entrance_02/entrance_02.glb"
+dest_files=["res://.godot/imported/entrance_02.glb-9c7a920317af0c93fa2591ce66127f41.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/entrance_02/entrance_02.res",
+"save_to_file/fallback_path": "res://models/Brazil/art_deco/entrance_02/entrance_02.res",
 "save_to_file/path": "uid://bs3dxyxp2huba"
 }
 }
