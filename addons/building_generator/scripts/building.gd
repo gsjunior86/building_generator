@@ -3,6 +3,19 @@ extends Node3D
 
 class_name Building
 
+var is_ready = true
+
+@export var floors: int = 1:
+	set(value):
+		value = max(1,value)
+		if is_ready:
+			if value > floors:
+				_manage_child_facade_floors(value, true)
+			elif value < floors:
+				print('delete')
+				_manage_child_facade_floors(abs(floors-value), false)
+		floors = value
+
 @export_group("Visibility Range")
 
 @export_range(0,1000) var begin: int = 150
@@ -94,7 +107,17 @@ func export_mesh() -> void:
 		static_body.owner = get_tree().edited_scene_root
 		lod_box.owner = get_tree().edited_scene_root
 		building_node.owner = get_tree().edited_scene_root	
-	
+
+func _manage_child_facade_floors(value: int, add: bool) -> void:
+	for i in get_child_count():
+		if get_child(i) is Facade:
+			var facade = get_child(i) as Facade
+			if add: 
+				facade.add_floors(value)
+			else:
+				facade.remove_floor(value)
+			
+			
 
 func _enter_tree() -> void:
 	pass

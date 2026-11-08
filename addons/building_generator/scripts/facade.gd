@@ -16,15 +16,16 @@ var mesh: ArrayMesh:
 
 
 var models_path:= "res://addons/building_generator/models/{0}"
-@export var floors: int = 1:
-	set(value):
-		value = max(1,value)
-		if is_ready:
-			if value > floors:
-				add_floors(value)
-			elif value < floors:
-				remove_floor(abs(floors - value))
-		floors = value
+#@export var floors: int = 1:
+	#set(value):
+		#value = max(1,value)
+		#if is_ready:
+			#if value > (get_parent() as Building).floors:
+				#add_floors(value)
+			#elif value < (get_parent() as Building).floors:
+				#print('removing...')
+				#remove_floor(abs((get_parent() as Building).floors - value))
+		#floors = value
 @export var columns: int = 1:
 	set(value):
 		value = max(1,value)
@@ -209,8 +210,14 @@ func _enter_tree():
 		tree_entered.connect(initialize)
 	
 func _ready() -> void:
-	if get_child_count() == 0:
-		add_floors(floors)
+	add_floors((get_parent() as Building).floors, true)
+	var child_count = get_parent().get_child_count()
+	if child_count < 2:
+		return
+	var lastFacade: Facade = get_parent().get_child(child_count - 2)
+	var meshInstance: MeshInstance3D = lastFacade.get_child(lastFacade.columns * get_parent().floors - 1) as MeshInstance3D
+	var width = meshInstance.mesh.get_aabb().size.z
+	self.position = Vector3(self.position.x, self.position.y, lastFacade.position.z + meshInstance.position.z + width)
 		
 		
 func _has_children(name: String) -> bool:
@@ -232,8 +239,8 @@ func duplicate_mesh_with_materials(original_mesh: Mesh) -> Mesh:
 
 
 func remove_floor(n: int):
-	var offset = abs(floors - n)
-	var fl = floors
+	var fl = (get_parent() as Building).floors
+	var offset = abs(fl - n)
 	for column in columns:
 		for floor in fl:
 			if floor+1 > offset:
@@ -242,8 +249,8 @@ func remove_floor(n: int):
 	notify_property_list_changed()
 
 func remove_columns(n: int):
+	var fl = (get_parent() as Building).floors
 	var offset = abs(columns - n)
-	var fl = floors
 	for column in columns:
 		for floor in fl:
 			if column >= offset:
@@ -257,11 +264,11 @@ func remove_columns(n: int):
 			#remove_child(child)
 			#count+=1
 			
-func add_floors(floor_count: int):
-	if get_child_count() == 0:
-		floor_count = 1
+func add_floors(floor_count: int, first_time: bool = false):
+	#if get_child_count() == 0:
+		#floor_count = 1
 	if !mesh == null:
-		for floor in range(floors, floor_count+1):
+		for floor in range(1 if first_time else (get_parent() as Building).floors, floor_count+1):
 			for col in columns:
 				var name = name_format.format([col,floor])
 				var floor3D = MeshInstance3D.new()
@@ -282,7 +289,7 @@ func add_floors(floor_count: int):
 func add_columns(col_count: int):
 	if !mesh == null:
 		for col in range(columns, col_count):
-			for floor in floors:
+			for floor in (get_parent() as Building).floors:
 				var name = name_format.format([columns,floor+1])
 				var floor3D = MeshInstance3D.new()
 				floor3D.set_meta("model",country+"/"+style+"/"+model)
