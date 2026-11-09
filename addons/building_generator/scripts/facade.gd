@@ -210,14 +210,20 @@ func _enter_tree():
 		tree_entered.connect(initialize)
 	
 func _ready() -> void:
+	var is_new := get_child_count() == 0
 	add_floors((get_parent() as Building).floors, true)
-	var child_count = get_parent().get_child_count()
-	if child_count < 2:
+	var my_index := get_index()
+	if not is_new or my_index == 0:
 		return
-	var lastFacade: Facade = get_parent().get_child(child_count - 2)
+	var lastFacade: Facade = get_parent().get_child(my_index - 1) as Facade
+	if lastFacade == null:
+		return
 	var meshInstance: MeshInstance3D = lastFacade.get_child(lastFacade.columns * get_parent().floors - 1) as MeshInstance3D
-	var width = meshInstance.mesh.get_aabb().size.z
-	self.position = Vector3(self.position.x, self.position.y, lastFacade.position.z + meshInstance.position.z + width)
+	# Far edge of the previous facade's last column, in parent space
+	var prev_end_z: float = lastFacade.position.z + meshInstance.position.z + meshInstance.mesh.get_aabb().end.z
+	# Near edge of this facade's first column in local space (0 when the mesh origin sits at the edge)
+	var my_start_z: float = mesh.get_aabb().position.z if mesh != null else 0.0
+	self.position = Vector3(self.position.x, self.position.y, prev_end_z - my_start_z)
 		
 		
 func _has_children(name: String) -> bool:
