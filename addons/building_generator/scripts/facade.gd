@@ -209,6 +209,11 @@ func _enter_tree():
 	if not tree_entered.is_connected(initialize):
 		tree_entered.connect(initialize)
 	
+## Builds the floor/column grid and, for a freshly added facade only,
+## positions it flush against the previous facade along Z.
+## Facades loaded from a saved scene already have their children and a
+## saved position, so the offset is skipped for them; otherwise every
+## scene reload would keep accumulating a new offset on top of the saved one.
 func _ready() -> void:
 	var is_new := get_child_count() == 0
 	add_floors((get_parent() as Building).floors, true)
@@ -218,12 +223,7 @@ func _ready() -> void:
 	var lastFacade: Facade = get_parent().get_child(my_index - 1) as Facade
 	if lastFacade == null:
 		return
-	var meshInstance: MeshInstance3D = lastFacade.get_child(lastFacade.columns * get_parent().floors - 1) as MeshInstance3D
-	# Far edge of the previous facade's last column, in parent space
-	var prev_end_z: float = lastFacade.position.z + meshInstance.position.z + meshInstance.mesh.get_aabb().end.z
-	# Near edge of this facade's first column in local space (0 when the mesh origin sits at the edge)
-	var my_start_z: float = mesh.get_aabb().position.z if mesh != null else 0.0
-	self.position = Vector3(self.position.x, self.position.y, prev_end_z - my_start_z)
+	self.position = Vector3(self.position.x, self.position.y, lastFacade.get_end_z() - get_start_z())
 		
 		
 func _has_children(name: String) -> bool:
@@ -287,6 +287,7 @@ func add_floors(floor_count: int, first_time: bool = false):
 				var node = get_node_or_null(name)
 				if node == null:
 					add_child(floor3D)
+					#add_child(floor3D, false, Node.INTERNAL_MODE_BACK)
 					if Engine.is_editor_hint():
 						floor3D.owner = get_tree().edited_scene_root
 		
@@ -305,19 +306,75 @@ func add_columns(col_count: int):
 				var width =  floor3D.mesh.get_aabb().size.z
 				floor3D.position = Vector3(0,floor * height,col * width)
 				add_child(floor3D)
+				#add_child(floor3D, false, Node.INTERNAL_MODE_BACK)
 				if Engine.is_editor_hint():
 					floor3D.owner = get_tree().edited_scene_root
 				notify_property_list_changed()
 	
 		
+## Swaps the mesh of every floor/column instance and recomputes each
+## instance's grid position using the new mesh's size.
+## The repositioning is needed because instance positions are derived from
+## the mesh width/height: without it, picking a wider or narrower mesh
+## would leave gaps or overlaps inside this facade. Finishes by calling
+## update_facades() so the following facades stay flush against this one.
 func update_instances():
-	var childrens = get_children()
-	for child in childrens:
-		if child is MeshInstance3D:
-			var instance3d = child as MeshInstance3D
-			instance3d.set_mesh(mesh)
-			instance3d.set_meta("model",country+"/"+style+"/"+model)
-			child = instance3d
+	if mesh == null:
+		return
+	var building := get_parent() as Building
+	if building == null:
+		return
+	var height: float = mesh.get_aabb().size.y
+	var width: float = mesh.get_aabb().size.z
+	for floor in range(1, building.floors + 1):
+		for col in columns:
+			var node := get_node_or_null(name_format.format([col, floor])) as MeshInstance3D
+			if node == null:
+				continue
+			node.set_mesh(mesh)
+			node.set_meta("model", country + "/" + style + "/" + model)
+			node.position = Vector3(0, (floor - 1) * height, col * width)
+	update_facades()
+	
+## Re-lays out every facade that comes after this one in the parent
+## Building, placing each flush against its predecessor's far edge.
+## This is a full re-layout rather than shifting facades by the width
+## difference, so it stays correct no matter what changed (mesh size,
+## column count, child order) and running it twice is a no-op.
+func update_facades() -> void:
+	var parent := get_parent()
+	if parent == null:
+		return
+	var prev: Facade = self
+	for i in range(get_index() + 1, parent.get_child_count()):
+		var next := parent.get_child(i) as Facade
+		if next == null:
+			continue
+		next.position = Vector3(next.position.x, next.position.y, prev.get_end_z() - next.get_start_z())
+		prev = next
+
+## Returns the Z coordinate, in parent space, of the far edge of this
+## facade's last column. Falls back to the facade's own position when the
+## grid or mesh isn't available yet (e.g. while a scene is still loading).
+func get_end_z() -> float:
+	var building := get_parent() as Building
+	if building == null:
+		return position.z
+	var last_index := columns * building.floors - 1
+	if get_child_count() <= last_index:
+		return position.z
+	var last_mesh := get_child(last_index) as MeshInstance3D
+	if last_mesh == null or last_mesh.mesh == null:
+		return position.z
+	return position.z + last_mesh.position.z + last_mesh.mesh.get_aabb().end.z
+
+## Returns the Z coordinate, in local space, where this facade's mesh
+## geometry begins. Zero when the mesh origin sits at its edge; otherwise
+## this offset is subtracted when positioning so facades stay flush.
+func get_start_z() -> float:
+	return mesh.get_aabb().position.z if mesh != null else 0.0
+	
+			
 			
 
 func _get_configuration_warnings():
