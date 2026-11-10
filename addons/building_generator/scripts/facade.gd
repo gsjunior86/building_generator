@@ -4,6 +4,9 @@ extends Node3D
 class_name Facade
 
 @export_group("General Properties")
+## Mesh used by every floor/column instance of this facade.
+## Loaded from the selected model's .res file and deep-duplicated so each
+## facade owns its mesh and materials (see duplicate_mesh_with_materials()).
 var mesh: ArrayMesh:
 	set(value):
 		var mesh_path: String = selected_model_path.path_join(model).path_join(model + ".res")  # or .tres, .obj, etc.
@@ -26,6 +29,8 @@ var models_path:= "res://addons/building_generator/models/{0}"
 				#print('removing...')
 				#remove_floor(abs((get_parent() as Building).floors - value))
 		#floors = value
+## Number of columns in the facade grid (minimum 1). Increasing it calls
+## add_columns(), decreasing it calls remove_columns().
 @export var columns: int = 1:
 	set(value):
 		value = max(1,value)
@@ -37,6 +42,8 @@ var models_path:= "res://addons/building_generator/models/{0}"
 				remove_columns(abs(columns - value))
 		columns = value
 
+## Country whose style set this facade uses. Changing it resets
+## [member style] so a new style can be picked from that country's directory.
 @export_enum("Brazil","Russia","Germany") var country: String = "Brazil":
 	set(value):
 		country = value
@@ -49,6 +56,10 @@ var misc: Dictionary = {} as Dictionary[String, bool]
 var misc_config: MiscConfig = null
 var is_building_parent: bool = true
 
+## Handles the dynamic "misc_items/<name>" toggles shown in the inspector.
+## Toggling one on stores it in [member misc] and adds that item as a child
+## of every column mesh; toggling it off removes it again
+## (see ItemConfig.add_item_as_children).
 func _set(property: StringName, value) -> bool:
 	if Engine.is_editor_hint():
 		var key = property.trim_prefix("misc_items/")
@@ -67,6 +78,8 @@ func _set(property: StringName, value) -> bool:
 	
 	return false
 
+## Returns the current value of a dynamic "misc_items/<name>" toggle,
+## or null for any other property.
 func _get(property: StringName):
 	var prop := String(property)
 	if prop.begins_with("misc_items/"):
@@ -74,6 +87,8 @@ func _get(property: StringName):
 		return misc.get(key)
 	return null
 	
+## Style within the selected [member country] (e.g. "art_deco").
+## Listed as an enum by _get_property_list(); cleared when country changes.
 var style: String = "":
 	set(value):
 		#if value:
@@ -82,6 +97,9 @@ var style: String = "":
 		style = value
 		notify_property_list_changed()
 		
+## Model within the selected [member style]. Setting it resolves the
+## model's .res file, loads it into [member mesh], then refreshes every
+## floor/column instance via update_instances().
 var model: String = "":
 	set(value):
 		model = value
@@ -109,6 +127,9 @@ var model: String = "":
 		notify_property_list_changed()
 var selected_model_path: String = ""
 
+## Builds the dynamic inspector properties: the style enum for the chosen
+## country, the model enum for the chosen style, a read-only mesh preview,
+## and one "misc_items/<name>" toggle per misc item the model supports.
 func _get_property_list() -> Array[Dictionary]:
 	var props: Array[Dictionary] = []
 	# --- Exported enum for style (only visible when Brazil is selected) ---
@@ -170,6 +191,8 @@ func _get_property_list() -> Array[Dictionary]:
 	return props
 	
 
+## Returns the names of the style directories available under the given
+## country, or an empty list if the country directory can't be opened.
 func _get_styles_for_country(country_name: String) -> Array[String]:
 	var dir = DirAccess.open(models_path.format([country_name]))
 	var ret :Array[String] = []
@@ -178,6 +201,8 @@ func _get_styles_for_country(country_name: String) -> Array[String]:
 			ret.append(d)
 	return ret
 
+## Returns the sorted names of the model directories available under the
+## given country/style pair, or an empty list if the directory doesn't exist.
 func _get_model_for_styles(country_name: String, style: String) -> Array[String]:
 	var formatted_base_country = models_path.format([country_name])
 	var dir_path = formatted_base_country.path_join(style)
@@ -205,6 +230,8 @@ var is_ready = true
 
 
 
+## Connects the tree_entered signal to initialize() the first time this
+## node enters the tree.
 func _enter_tree():
 	if not tree_entered.is_connected(initialize):
 		tree_entered.connect(initialize)
@@ -226,6 +253,7 @@ func _ready() -> void:
 	self.position = Vector3(self.position.x, self.position.y, lastFacade.get_end_z() - get_start_z())
 		
 		
+## Returns true if a direct child with the given name exists.
 func _has_children(name: String) -> bool:
 	for child in get_children():
 		if child.name == name:
@@ -233,6 +261,9 @@ func _has_children(name: String) -> bool:
 	return false;
 
 
+## Deep-duplicates a mesh and each of its surface materials, so edits to
+## one facade's mesh or materials never affect other facades built from
+## the same source resource.
 func duplicate_mesh_with_materials(original_mesh: Mesh) -> Mesh:
 	var unique_mesh: ArrayMesh = original_mesh.duplicate(true) # deep copy
 
@@ -244,6 +275,8 @@ func duplicate_mesh_with_materials(original_mesh: Mesh) -> Mesh:
 	return unique_mesh
 
 
+## Removes the top [param n] floors from every column of the grid.
+## Called by Building when its floor count decreases.
 func remove_floor(n: int):
 	var fl = (get_parent() as Building).floors
 	var offset = abs(fl - n)
@@ -254,6 +287,7 @@ func remove_floor(n: int):
 				remove_child(get_node(name))
 	notify_property_list_changed()
 
+## Removes the last [param n] columns (across every floor) from the grid.
 func remove_columns(n: int):
 	var fl = (get_parent() as Building).floors
 	var offset = abs(columns - n)
@@ -270,6 +304,11 @@ func remove_columns(n: int):
 			#remove_child(child)
 			#count+=1
 			
+## Adds mesh instances up to [param floor_count] floors — starting at
+## floor 1 on the first build, or at the building's current floor count
+## when floors are added later. Instances are named with name_format and
+## positioned by mesh size; ones that already exist (e.g. restored from a
+## saved scene) are left untouched.
 func add_floors(floor_count: int, first_time: bool = false):
 	#if get_child_count() == 0:
 		#floor_count = 1
@@ -293,6 +332,8 @@ func add_floors(floor_count: int, first_time: bool = false):
 		
 	notify_property_list_changed()
 		
+## Adds columns from the current column count up to [param col_count],
+## creating one mesh instance per floor in each new column.
 func add_columns(col_count: int):
 	if !mesh == null:
 		for col in range(columns, col_count):
@@ -377,6 +418,8 @@ func get_start_z() -> float:
 			
 			
 
+## Shows an editor warning when this node is not a child of a Building,
+## in which case its floors are stripped and it is marked as not ready.
 func _get_configuration_warnings():
 	var warnings = PackedStringArray()
 	is_ready = true
@@ -387,5 +430,7 @@ func _get_configuration_warnings():
 	request_ready()
 	return warnings
 		
+## Callback connected to tree_entered; currently a no-op kept as an
+## extension point.
 func initialize():
 	pass
