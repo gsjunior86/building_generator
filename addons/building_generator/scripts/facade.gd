@@ -15,6 +15,7 @@ var mesh: ArrayMesh:
 		else:
 			push_warning("Mesh not found at: " + mesh_path)
 			mesh = null
+		_apply_material_overrides()
 		notify_property_list_changed()
 
 
@@ -30,7 +31,8 @@ var models_path:= "res://addons/building_generator/models/{0}"
 				#remove_floor(abs((get_parent() as Building).floors - value))
 		#floors = value
 ## Number of columns in the facade grid (minimum 1). Increasing it calls
-## add_columns(), decreasing it calls remove_columns().
+## add_columns(), decreasing it calls remove_columns(); afterwards the
+## following facades are re-laid out via update_facades().
 @export var columns: int = 1:
 	set(value):
 		value = max(1,value)
@@ -41,6 +43,8 @@ var models_path:= "res://addons/building_generator/models/{0}"
 			elif value < columns:
 				remove_columns(abs(columns - value))
 		columns = value
+		if is_ready:
+			update_facades()
 
 ## Country whose style set this facade uses. Changing it resets
 ## [member style] so a new style can be picked from that country's directory.
@@ -53,15 +57,34 @@ var models_path:= "res://addons/building_generator/models/{0}"
 
 
 var misc: Dictionary = {} as Dictionary[String, bool]
+## Per-surface material overrides (surface name → Material), applied to
+## the facade's shared mesh and therefore to every floor/column instance.
+## Editable in the inspector via the dynamic "materials/<surface>" slots.
+var materials: Dictionary = {} as Dictionary[String, Material]
 var misc_config: MiscConfig = null
 var is_building_parent: bool = true
 
-## Handles the dynamic "misc_items/<name>" toggles shown in the inspector.
-## Toggling one on stores it in [member misc] and adds that item as a child
-## of every column mesh; toggling it off removes it again
-## (see ItemConfig.add_item_as_children).
+## Handles the dynamic inspector properties.
+## For "materials/<surface>": stores the override in [member materials] and
+## applies it to the shared mesh; clearing the slot reloads the mesh to
+## restore the original material.
+## For "misc_items/<name>": toggling one on stores it in [member misc] and
+## adds that item as a child of every column mesh; toggling it off removes
+## it again (see ItemConfig.add_item_as_children).
 func _set(property: StringName, value) -> bool:
 	if Engine.is_editor_hint():
+		if property.begins_with("materials/"):
+			var surface_name := property.trim_prefix("materials/")
+			if value == null:
+				materials.erase(surface_name)
+				# The mesh setter reloads the mesh from the model file,
+				# restoring the original material before re-applying overrides
+				if selected_model_path != "":
+					self.mesh = mesh
+			else:
+				materials[surface_name] = value
+				_apply_material_overrides()
+			return true
 		var key = property.trim_prefix("misc_items/")
 		if(value == null):
 			return false		
@@ -78,10 +101,20 @@ func _set(property: StringName, value) -> bool:
 	
 	return false
 
-## Returns the current value of a dynamic "misc_items/<name>" toggle,
-## or null for any other property.
+## Returns the current value of a dynamic property: the stored override
+## (or the mesh's current surface material) for "materials/<surface>",
+## the toggle state for "misc_items/<name>", or null otherwise.
 func _get(property: StringName):
 	var prop := String(property)
+	if prop.begins_with("materials/"):
+		var surface_name := prop.get_slice("/", 1)
+		if materials.has(surface_name):
+			return materials[surface_name]
+		if mesh != null:
+			for i in mesh.get_surface_count():
+				if mesh.surface_get_name(i) == surface_name:
+					return mesh.surface_get_material(i)
+		return null
 	if prop.begins_with("misc_items/"):
 		var key := prop.get_slice("/", 1)
 		return misc.get(key)
@@ -129,7 +162,8 @@ var selected_model_path: String = ""
 
 ## Builds the dynamic inspector properties: the style enum for the chosen
 ## country, the model enum for the chosen style, a read-only mesh preview,
-## and one "misc_items/<name>" toggle per misc item the model supports.
+## one "materials/<surface>" material slot per mesh surface, and one
+## "misc_items/<name>" toggle per misc item the model supports.
 func _get_property_list() -> Array[Dictionary]:
 	var props: Array[Dictionary] = []
 	# --- Exported enum for style (only visible when Brazil is selected) ---
@@ -174,6 +208,19 @@ func _get_property_list() -> Array[Dictionary]:
 				#"usage": PROPERTY_USAGE_DEFAULT
 				"usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_READ_ONLY
 			})
+			
+		if mesh != null:
+			for i in mesh.get_surface_count():
+				var surface_name := mesh.surface_get_name(i)
+				if surface_name == "":
+					surface_name = "surface_" + str(i)
+				props.append({
+					"name": "materials/" + surface_name,
+					"type": TYPE_OBJECT,
+					"hint": PROPERTY_HINT_RESOURCE_TYPE,
+					"hint_string": "Material",
+					"usage": PROPERTY_USAGE_DEFAULT
+				})
 			
 			
 		if model !="" and style != "" and country != "None":
@@ -274,6 +321,17 @@ func duplicate_mesh_with_materials(original_mesh: Mesh) -> Mesh:
 			unique_mesh.surface_set_material(surface, mat.duplicate())
 	return unique_mesh
 
+## Applies the stored material overrides to the current mesh, matching
+## surfaces by name. Overrides whose surface doesn't exist in the mesh
+## (e.g. after a model swap) are ignored.
+func _apply_material_overrides() -> void:
+	if mesh == null:
+		return
+	for i in mesh.get_surface_count():
+		var surface_name := mesh.surface_get_name(i)
+		if materials.has(surface_name):
+			mesh.surface_set_material(i, materials[surface_name])
+
 
 ## Removes the top [param n] floors from every column of the grid.
 ## Called by Building when its floor count decreases.
@@ -338,7 +396,7 @@ func add_columns(col_count: int):
 	if !mesh == null:
 		for col in range(columns, col_count):
 			for floor in (get_parent() as Building).floors:
-				var name = name_format.format([columns,floor+1])
+				var name = name_format.format([col,floor+1])
 				var floor3D = MeshInstance3D.new()
 				floor3D.set_meta("model",country+"/"+style+"/"+model)
 				floor3D.name = name
