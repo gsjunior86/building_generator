@@ -3,19 +3,21 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ws3y6tf1r76l"
-path="res://.godot/imported/floor_window_03.glb-f0bcd1ac98c7d97407fdd9bc28dfd2b8.scn"
+uid="uid://cpnnpe45kfgxp"
+path="res://.godot/imported/floor_window_01.glb-3f36482a1db39115c04183c1a8f7aa49.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/floor_window_03/floor_window_03.glb"
-dest_files=["res://.godot/imported/floor_window_03.glb-f0bcd1ac98c7d97407fdd9bc28dfd2b8.scn"]
+source_file="res://addons/building_generator/models/Brazil/art_deco/_ground/floor_window_01/floor_window_01.glb"
+dest_files=["res://.godot/imported/floor_window_01.glb-3f36482a1db39115c04183c1a8f7aa49.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
+mesh_library/use_node_names_as_mesh_names=false
+array_mesh/deduplicate_surfaces=true
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
@@ -38,17 +40,25 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
+"materials": {
+"floor_window": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/building_generator/materials/buildings/brazil/art_deco/floor_window_01.tres",
+"use_external/path": "uid://b723oy6v3iadi"
+}
+},
 "meshes": {
-"floor_window_03_Cube_026": {
+"floor_window_01_Cube_005": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/floor_window_03/floor_window_03.res",
-"save_to_file/path": "uid://dpg63jeo0kyxv"
+"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/_ground/floor_window_01/floor_window_01.res",
+"save_to_file/path": "uid://dwrshearuhk5x"
 }
 }
 }
 gltf/naming_version=2
 gltf/embedded_image_handling=1
+gltf/texture_map_mode=0

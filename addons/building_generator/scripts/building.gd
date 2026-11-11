@@ -3,6 +3,21 @@ extends Node3D
 
 class_name Building
 
+var is_ready = true
+
+## Number of floors of the building (minimum 1). Changing it adds floors
+## to or removes floors from every child Facade.
+@export var floors: int = 1:
+	set(value):
+		value = max(1,value)
+		if is_ready:
+			if value > floors:
+				_manage_child_facade_floors(value, true)
+			elif value < floors:
+				print('delete')
+				_manage_child_facade_floors(abs(floors-value), false)
+		floors = value
+
 @export_group("Visibility Range")
 
 @export_range(0,1000) var begin: int = 150
@@ -11,6 +26,10 @@ class_name Building
 @export_range(0,1000) var end: int = 150
 @export_range(0,1000) var end_margin: int = 5
 
+## Bakes the building into a static, export-friendly copy added next to
+## this node: one MultiMeshInstance3D per distinct model (with visibility
+## range fading), an LOD box mesh, and a StaticBody3D collision box, all
+## derived from the combined bounds of the facades.
 func export_mesh() -> void:
 	
 	var building_node = Node3D.new()
@@ -94,10 +113,24 @@ func export_mesh() -> void:
 		static_body.owner = get_tree().edited_scene_root
 		lod_box.owner = get_tree().edited_scene_root
 		building_node.owner = get_tree().edited_scene_root	
-	
 
+## Adds floors to ([param add] = true) or removes floors from every child
+## Facade. Called when the building's [member floors] value changes.
+func _manage_child_facade_floors(value: int, add: bool) -> void:
+	for i in get_child_count():
+		if get_child(i) is Facade:
+			var facade = get_child(i) as Facade
+			if add: 
+				facade.add_floors(value)
+			else:
+				facade.remove_floor(value)
+			
+			
+
+## Reserved lifecycle hooks; currently unused.
 func _enter_tree() -> void:
 	pass
 
+## Reserved lifecycle hook; currently unused.
 func _exit_tree() -> void:
 	pass

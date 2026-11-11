@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dv61oc62tr0hn"]
+
+[ext_resource type="Shader" uid="uid://wqg33u4yvxeq" path="res://addons/building_generator/shaders/interior_shader.gdshader" id="1_onbbw"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_onbbw")
+shader_parameter/room_depth = 1.0
+shader_parameter/emission_strength = 0.0

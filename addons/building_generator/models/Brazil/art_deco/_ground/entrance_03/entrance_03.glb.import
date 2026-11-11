@@ -3,19 +3,21 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dq37bd80w3jof"
-path="res://.godot/imported/entrance_02.glb-b5da4df5f28bb47f5c34bb26ed3237a2.scn"
+uid="uid://dcah6oxwiooki"
+path="res://.godot/imported/entrance_03.glb-3309df7d93cd04c23aa58a6baf62ec7f.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Brazil/art_deco/entrance_02/entrance_02.glb"
-dest_files=["res://.godot/imported/entrance_02.glb-b5da4df5f28bb47f5c34bb26ed3237a2.scn"]
+source_file="res://addons/building_generator/models/Brazil/art_deco/_ground/entrance_03/entrance_03.glb"
+dest_files=["res://.godot/imported/entrance_03.glb-3309df7d93cd04c23aa58a6baf62ec7f.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
+mesh_library/use_node_names_as_mesh_names=false
+array_mesh/deduplicate_surfaces=true
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
@@ -39,16 +41,17 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "meshes": {
-"entrance_02_Cube_010": {
+"entrance_03_Cube_011": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/entrance_02/entrance_02.res",
-"save_to_file/path": "uid://bs3dxyxp2huba"
+"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/_ground/entrance_03/entrance_03.res",
+"save_to_file/path": "uid://cvnp6bq1uahev"
 }
 }
 }
 gltf/naming_version=2
 gltf/embedded_image_handling=1
+gltf/texture_map_mode=0
