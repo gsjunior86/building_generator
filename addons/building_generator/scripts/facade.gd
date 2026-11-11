@@ -19,6 +19,23 @@ var mesh: ArrayMesh:
 		notify_property_list_changed()
 
 
+## Mesh used by the floor-1 instances when a model from the style's
+## optional "_ground" folder is selected (see [member ground_model]).
+## Loaded and deep-duplicated like [member mesh]. Clears silently when no
+## ground model is selected.
+var ground_mesh: ArrayMesh:
+	set(value):
+		var mesh_path: String = selected_ground_model_path.path_join(ground_model).path_join(ground_model + ".res")  # or .tres, .obj, etc.
+		if ResourceLoader.exists(mesh_path):
+			ground_mesh = duplicate_mesh_with_materials(load(mesh_path).duplicate_deep(Resource.DEEP_DUPLICATE_ALL) as ArrayMesh)
+		else:
+			if ground_model != "":
+				push_warning("Ground mesh not found at: " + mesh_path)
+			ground_mesh = null
+		_apply_material_overrides()
+		notify_property_list_changed()
+
+
 var models_path:= "res://addons/building_generator/models/{0}"
 #@export var floors: int = 1:
 	#set(value):
@@ -60,7 +77,11 @@ var misc: Dictionary = {} as Dictionary[String, bool]
 ## Per-surface material overrides (surface name → Material), applied to
 ## the facade's shared mesh and therefore to every floor/column instance.
 ## Editable in the inspector via the dynamic "materials/<surface>" slots.
-var materials: Dictionary = {} as Dictionary[String, Material]
+var mesh_materials: Dictionary = {} as Dictionary[String, Material]
+## Per-surface material overrides for the ground-floor mesh (surface
+## name → Material). Editable via the dynamic "floor_materials/<surface>"
+## slots, shown after the mesh materials.
+var floor_materials: Dictionary = {} as Dictionary[String, Material]
 var misc_config: MiscConfig = null
 var is_building_parent: bool = true
 
@@ -73,16 +94,26 @@ var is_building_parent: bool = true
 ## it again (see ItemConfig.add_item_as_children).
 func _set(property: StringName, value) -> bool:
 	if Engine.is_editor_hint():
-		if property.begins_with("materials/"):
-			var surface_name := property.trim_prefix("materials/")
+		if property.begins_with("mesh_materials/"):
+			var surface_name := property.trim_prefix("mesh_materials/")
 			if value == null:
-				materials.erase(surface_name)
+				mesh_materials.erase(surface_name)
 				# The mesh setter reloads the mesh from the model file,
 				# restoring the original material before re-applying overrides
 				if selected_model_path != "":
 					self.mesh = mesh
 			else:
-				materials[surface_name] = value
+				mesh_materials[surface_name] = value
+				_apply_material_overrides()
+			return true
+		if property.begins_with("floor_materials/"):
+			var surface_name := property.trim_prefix("floor_materials/")
+			if value == null:
+				floor_materials.erase(surface_name)
+				if selected_ground_model_path != "":
+					self.ground_mesh = ground_mesh
+			else:
+				floor_materials[surface_name] = value
 				_apply_material_overrides()
 			return true
 		var key = property.trim_prefix("misc_items/")
@@ -106,14 +137,23 @@ func _set(property: StringName, value) -> bool:
 ## the toggle state for "misc_items/<name>", or null otherwise.
 func _get(property: StringName):
 	var prop := String(property)
-	if prop.begins_with("materials/"):
+	if prop.begins_with("mesh_materials/"):
 		var surface_name := prop.get_slice("/", 1)
-		if materials.has(surface_name):
-			return materials[surface_name]
+		if mesh_materials.has(surface_name):
+			return mesh_materials[surface_name]
 		if mesh != null:
 			for i in mesh.get_surface_count():
 				if mesh.surface_get_name(i) == surface_name:
 					return mesh.surface_get_material(i)
+		return null
+	if prop.begins_with("floor_materials/"):
+		var surface_name := prop.get_slice("/", 1)
+		if floor_materials.has(surface_name):
+			return floor_materials[surface_name]
+		if ground_mesh != null:
+			for i in ground_mesh.get_surface_count():
+				if ground_mesh.surface_get_name(i) == surface_name:
+					return ground_mesh.surface_get_material(i)
 		return null
 	if prop.begins_with("misc_items/"):
 		var key := prop.get_slice("/", 1)
@@ -160,10 +200,46 @@ var model: String = "":
 		notify_property_list_changed()
 var selected_model_path: String = ""
 
+## Ground-floor model from the style's optional "_ground" folder. The
+## ground floor is an extra floor below floor 1 (instances named floor_0)
+## and follows the column count. Selecting "<Nothing>" removes it again.
+var ground_model: String = "":
+	set(value):
+		ground_model = value
+		if ground_model == "" or ground_model == "Nothing":
+			ground_mesh = null
+			remove_ground_instances()
+		elif country and style:
+			var dir_path = models_path.format([country]).path_join(style).path_join("_ground")
+			if DirAccess.dir_exists_absolute(dir_path):
+				var dir = DirAccess.open(dir_path)
+				selected_ground_model_path = dir.get_current_dir()
+				
+				# Try to load mesh with better error handling
+				var mesh_path = selected_ground_model_path.path_join(ground_model).path_join(ground_model + ".res")
+				if ResourceLoader.exists(mesh_path):
+					var loaded_mesh = load(mesh_path)
+					if loaded_mesh is ArrayMesh:
+						self.ground_mesh = loaded_mesh
+					else:
+						push_warning("Loaded resource is not an ArrayMesh: " + mesh_path)
+				else:
+					push_warning("Mesh file not found: " + mesh_path)
+			# While the scene is loading, the saved children don't exist yet;
+			# _ready() calls add_ground_instances() instead
+			if is_inside_tree():
+				add_ground_instances()
+		
+		update_instances()
+		notify_property_list_changed()
+var selected_ground_model_path: String = ""
+
 ## Builds the dynamic inspector properties: the style enum for the chosen
 ## country, the model enum for the chosen style, a read-only mesh preview,
-## one "materials/<surface>" material slot per mesh surface, and one
-## "misc_items/<name>" toggle per misc item the model supports.
+## one "mesh_materials/<surface>" material slot per mesh surface, the
+## ground_model enum plus "floor_materials/<surface>" slots when the style
+## has a "_ground" folder, and one "misc_items/<name>" toggle per misc
+## item the model supports.
 func _get_property_list() -> Array[Dictionary]:
 	var props: Array[Dictionary] = []
 	# --- Exported enum for style (only visible when Brazil is selected) ---
@@ -215,7 +291,45 @@ func _get_property_list() -> Array[Dictionary]:
 				if surface_name == "":
 					surface_name = "surface_" + str(i)
 				props.append({
-					"name": "materials/" + surface_name,
+					"name": "mesh_materials/" + surface_name,
+					"type": TYPE_OBJECT,
+					"hint": PROPERTY_HINT_RESOURCE_TYPE,
+					"hint_string": "Material",
+					"usage": PROPERTY_USAGE_DEFAULT
+				})
+				
+		if style != "":
+			var ground_models_options := _get_model_for_styles(country, style, true)
+			if ground_models_options.size() > 0:
+				ground_models_options.push_front("Nothing")
+				if ground_model == "" or not ground_models_options.has(ground_model):
+					self.ground_model = "Nothing"
+				var model_hint_string := ",".join(ground_models_options)
+				props.append({
+					"name": "ground_model",
+					"type": TYPE_STRING,
+					"hint": PROPERTY_HINT_ENUM,
+					"hint_string": model_hint_string,
+					"usage": PROPERTY_USAGE_DEFAULT
+				})
+			elif ground_model != "":
+				# The selected style has no "_ground" folder
+				self.ground_model = ""
+			
+		if ground_mesh != null:
+			props.append({
+				"name": "ground_mesh",
+				"type": TYPE_OBJECT,
+				"hint": PROPERTY_HINT_RESOURCE_TYPE,
+				"hint_string": "ArrayMesh",
+				"usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_READ_ONLY
+			})
+			for i in ground_mesh.get_surface_count():
+				var surface_name := ground_mesh.surface_get_name(i)
+				if surface_name == "":
+					surface_name = "surface_" + str(i)
+				props.append({
+					"name": "floor_materials/" + surface_name,
 					"type": TYPE_OBJECT,
 					"hint": PROPERTY_HINT_RESOURCE_TYPE,
 					"hint_string": "Material",
@@ -249,13 +363,16 @@ func _get_styles_for_country(country_name: String) -> Array[String]:
 	return ret
 
 ## Returns the sorted names of the model directories available under the
-## given country/style pair, or an empty list if the directory doesn't exist.
-func _get_model_for_styles(country_name: String, style: String) -> Array[String]:
+## given country/style pair, or under its "_ground" subfolder when
+## [param ground] is true. Directories starting with "_" are only listed
+## in ground mode. A missing "_ground" folder is normal and
+## returns an empty list silently; a missing model folder warns.
+func _get_model_for_styles(country_name: String, style: String, ground: bool = false) -> Array[String]:
 	var formatted_base_country = models_path.format([country_name])
-	var dir_path = formatted_base_country.path_join(style)
-	
+	var dir_path = formatted_base_country.path_join(style).path_join("_ground") if ground else formatted_base_country.path_join(style) 
 	if not DirAccess.dir_exists_absolute(dir_path):
-		push_warning("Directory does not exist: " + dir_path)
+		if not ground:
+			push_warning("Directory does not exist: " + dir_path)
 		return []
 		
 	var dir = DirAccess.open(dir_path)
@@ -264,7 +381,7 @@ func _get_model_for_styles(country_name: String, style: String) -> Array[String]
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if dir.current_is_dir() and not file_name.begins_with("."):
+			if dir.current_is_dir() and not file_name.begins_with(".") and (ground or not file_name.begins_with("_")):
 				ret.append(file_name)
 			file_name = dir.get_next()
 		dir.list_dir_end()
@@ -291,6 +408,7 @@ func _enter_tree():
 func _ready() -> void:
 	var is_new := get_child_count() == 0
 	add_floors((get_parent() as Building).floors, true)
+	add_ground_instances()
 	var my_index := get_index()
 	if not is_new or my_index == 0:
 		return
@@ -321,16 +439,44 @@ func duplicate_mesh_with_materials(original_mesh: Mesh) -> Mesh:
 			unique_mesh.surface_set_material(surface, mat.duplicate())
 	return unique_mesh
 
-## Applies the stored material overrides to the current mesh, matching
-## surfaces by name. Overrides whose surface doesn't exist in the mesh
-## (e.g. after a model swap) are ignored.
+## Applies the stored material overrides to both meshes, matching surfaces
+## by name: [member mesh_materials] to [member mesh] and
+## [member floor_materials] to [member ground_mesh].
 func _apply_material_overrides() -> void:
-	if mesh == null:
+	_apply_materials_to(mesh, mesh_materials)
+	_apply_materials_to(ground_mesh, floor_materials)
+
+## Applies the given material overrides (surface name → Material) to the
+## target mesh. Overrides whose surface doesn't exist in the mesh
+## (e.g. after a model swap) are ignored.
+func _apply_materials_to(target: ArrayMesh, overrides: Dictionary) -> void:
+	if target == null:
 		return
-	for i in mesh.get_surface_count():
-		var surface_name := mesh.surface_get_name(i)
-		if materials.has(surface_name):
-			mesh.surface_set_material(i, materials[surface_name])
+	for i in target.get_surface_count():
+		var surface_name := target.surface_get_name(i)
+		if overrides.has(surface_name):
+			target.surface_set_material(i, overrides[surface_name])
+
+## Returns the mesh used by the given floor: the ground mesh for floor 0
+## when one is selected, the main mesh otherwise (floors are 1-based).
+func _mesh_for_floor(floor_num: int) -> ArrayMesh:
+	return ground_mesh if floor_num == 0 and ground_mesh != null else mesh
+
+## Returns the model path stored as metadata on each instance, used by
+## Building.export_mesh() to group instances by model.
+func _model_path_for_floor(floor_num: int) -> String:
+	if floor_num == 0 and ground_mesh != null:
+		return country + "/" + style + "/_ground/" + ground_model
+	return country + "/" + style + "/" + model
+
+## Returns the Y position of the given floor. The optional ground floor
+## (floor 0) sits at 0; regular floors stack on top of it, so with a
+## ground floor present, floor 1 starts at the ground mesh's height.
+func _floor_y(floor_num: int) -> float:
+	if floor_num <= 0:
+		return 0.0
+	var base := ground_mesh.get_aabb().size.y if ground_mesh != null else 0.0
+	return base + (floor_num - 1) * mesh.get_aabb().size.y
 
 
 ## Removes the top [param n] floors from every column of the grid.
@@ -345,7 +491,8 @@ func remove_floor(n: int):
 				remove_child(get_node(name))
 	notify_property_list_changed()
 
-## Removes the last [param n] columns (across every floor) from the grid.
+## Removes the last [param n] columns (across every floor) from the grid,
+## including their ground-floor instances.
 func remove_columns(n: int):
 	var fl = (get_parent() as Building).floors
 	var offset = abs(columns - n)
@@ -354,6 +501,7 @@ func remove_columns(n: int):
 			if column >= offset:
 				var name = name_format.format([column,floor+1])
 				remove_child(get_node(name))
+	remove_ground_instances(offset)
 	notify_property_list_changed()			
 		
 	
@@ -364,23 +512,24 @@ func remove_columns(n: int):
 			
 ## Adds mesh instances up to [param floor_count] floors — starting at
 ## floor 1 on the first build, or at the building's current floor count
-## when floors are added later. Instances are named with name_format and
-## positioned by mesh size; ones that already exist (e.g. restored from a
-## saved scene) are left untouched.
+## when floors are added later. Floor 1 uses the ground mesh when one is
+## selected (see [member ground_model]). Instances are named with
+## name_format and positioned by mesh size; ones that already exist
+## (e.g. restored from a saved scene) are left untouched.
 func add_floors(floor_count: int, first_time: bool = false):
 	#if get_child_count() == 0:
 		#floor_count = 1
 	if !mesh == null:
 		for floor in range(1 if first_time else (get_parent() as Building).floors, floor_count+1):
+			var floor_mesh := _mesh_for_floor(floor)
+			var width := floor_mesh.get_aabb().size.z
 			for col in columns:
 				var name = name_format.format([col,floor])
 				var floor3D = MeshInstance3D.new()
 				floor3D.name = name
-				floor3D.set_meta("model",country+"/"+style+"/"+model)
-				floor3D.set_mesh(mesh)
-				var height = floor3D.mesh.get_aabb().size.y
-				var width =  floor3D.mesh.get_aabb().size.z
-				floor3D.position = Vector3(0,(floor-1) * height,col * width)
+				floor3D.set_meta("model", _model_path_for_floor(floor))
+				floor3D.set_mesh(floor_mesh)
+				floor3D.position = Vector3(0, _floor_y(floor), col * width)
 				var node = get_node_or_null(name)
 				if node == null:
 					add_child(floor3D)
@@ -391,28 +540,63 @@ func add_floors(floor_count: int, first_time: bool = false):
 	notify_property_list_changed()
 		
 ## Adds columns from the current column count up to [param col_count],
-## creating one mesh instance per floor in each new column.
+## creating one mesh instance per floor in each new column. Floor-1
+## instances use the ground mesh when one is selected.
 func add_columns(col_count: int):
 	if !mesh == null:
 		for col in range(columns, col_count):
 			for floor in (get_parent() as Building).floors:
-				var name = name_format.format([col,floor+1])
+				var floor_num := floor + 1
+				var floor_mesh := _mesh_for_floor(floor_num)
+				var width := floor_mesh.get_aabb().size.z
+				var name = name_format.format([col,floor_num])
 				var floor3D = MeshInstance3D.new()
-				floor3D.set_meta("model",country+"/"+style+"/"+model)
+				floor3D.set_meta("model", _model_path_for_floor(floor_num))
 				floor3D.name = name
-				floor3D.set_mesh(mesh)
-				var height = floor3D.mesh.get_aabb().size.y
-				var width =  floor3D.mesh.get_aabb().size.z
-				floor3D.position = Vector3(0,floor * height,col * width)
+				floor3D.set_mesh(floor_mesh)
+				floor3D.position = Vector3(0, _floor_y(floor_num), col * width)
 				add_child(floor3D)
 				#add_child(floor3D, false, Node.INTERNAL_MODE_BACK)
 				if Engine.is_editor_hint():
 					floor3D.owner = get_tree().edited_scene_root
 				notify_property_list_changed()
+		add_ground_instances()
+	
+## Adds one ground-floor instance (floor 0) per column, skipping ones that
+## already exist (e.g. restored from a saved scene). Called when a ground
+## model is selected and after columns are added, so the ground floor
+## always follows the column count.
+func add_ground_instances():
+	if ground_mesh == null:
+		return
+	var width := ground_mesh.get_aabb().size.z
+	for col in columns:
+		var name = name_format.format([col, 0])
+		if get_node_or_null(name) != null:
+			continue
+		var floor3D = MeshInstance3D.new()
+		floor3D.name = name
+		floor3D.set_meta("model", _model_path_for_floor(0))
+		floor3D.set_mesh(ground_mesh)
+		floor3D.position = Vector3(0, 0, col * width)
+		add_child(floor3D)
+		if Engine.is_editor_hint():
+			floor3D.owner = get_tree().edited_scene_root
+
+## Removes the ground-floor (floor 0) instances, optionally only from
+## [param from_col] upwards (used when columns are removed).
+func remove_ground_instances(from_col: int = 0):
+	for col in range(from_col, columns):
+		var node = get_node_or_null(name_format.format([col, 0]))
+		if node != null:
+			remove_child(node)
+	notify_property_list_changed()
 	
 		
 ## Swaps the mesh of every floor/column instance and recomputes each
-## instance's grid position using the new mesh's size.
+## instance's grid position using the new mesh's size. When a ground mesh
+## is selected, the ground (floor 0) instances use it and the regular
+## floors stack on top of its height.
 ## The repositioning is needed because instance positions are derived from
 ## the mesh width/height: without it, picking a wider or narrower mesh
 ## would leave gaps or overlaps inside this facade. Finishes by calling
@@ -423,16 +607,16 @@ func update_instances():
 	var building := get_parent() as Building
 	if building == null:
 		return
-	var height: float = mesh.get_aabb().size.y
-	var width: float = mesh.get_aabb().size.z
-	for floor in range(1, building.floors + 1):
+	for floor in range(0 if ground_mesh != null else 1, building.floors + 1):
+		var floor_mesh := _mesh_for_floor(floor)
+		var width := floor_mesh.get_aabb().size.z
 		for col in columns:
 			var node := get_node_or_null(name_format.format([col, floor])) as MeshInstance3D
 			if node == null:
 				continue
-			node.set_mesh(mesh)
-			node.set_meta("model", country + "/" + style + "/" + model)
-			node.position = Vector3(0, (floor - 1) * height, col * width)
+			node.set_mesh(floor_mesh)
+			node.set_meta("model", _model_path_for_floor(floor))
+			node.position = Vector3(0, _floor_y(floor), col * width)
 	update_facades()
 	
 ## Re-lays out every facade that comes after this one in the parent
@@ -453,19 +637,21 @@ func update_facades() -> void:
 		prev = next
 
 ## Returns the Z coordinate, in parent space, of the far edge of this
-## facade's last column. Falls back to the facade's own position when the
-## grid or mesh isn't available yet (e.g. while a scene is still loading).
+## facade's last column. Both the top floor and the ground floor (when
+## present) are considered, since their meshes may differ in width.
+## Falls back to the facade's own position when the grid or mesh isn't
+## available yet (e.g. while a scene is still loading).
 func get_end_z() -> float:
 	var building := get_parent() as Building
 	if building == null:
 		return position.z
-	var last_index := columns * building.floors - 1
-	if get_child_count() <= last_index:
-		return position.z
-	var last_mesh := get_child(last_index) as MeshInstance3D
-	if last_mesh == null or last_mesh.mesh == null:
-		return position.z
-	return position.z + last_mesh.position.z + last_mesh.mesh.get_aabb().end.z
+	var end_z := position.z
+	var floors_to_check := [0, building.floors] if ground_mesh != null else [building.floors]
+	for floor_num in floors_to_check:
+		var last_mesh := get_node_or_null(name_format.format([columns - 1, floor_num])) as MeshInstance3D
+		if last_mesh != null and last_mesh.mesh != null:
+			end_z = max(end_z, position.z + last_mesh.position.z + last_mesh.mesh.get_aabb().end.z)
+	return end_z
 
 ## Returns the Z coordinate, in local space, where this facade's mesh
 ## geometry begins. Zero when the mesh origin sits at its edge; otherwise
