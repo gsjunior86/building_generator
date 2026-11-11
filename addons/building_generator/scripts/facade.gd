@@ -49,19 +49,20 @@ var models_path:= "res://addons/building_generator/models/{0}"
 		#floors = value
 ## Number of columns in the facade grid (minimum 1). Increasing it calls
 ## add_columns(), decreasing it calls remove_columns(); afterwards the
-## following facades are re-laid out via update_facades().
+## following facades are shifted by the distance this facade's end corner
+## moved (see _shift_followers()), so manually snapped corners survive.
 @export var columns: int = 1:
 	set(value):
 		value = max(1,value)
+		var end_before := _end_corner() if is_ready else Vector3.ZERO
 		if is_ready:
 			if value > columns:
 				add_columns(value)
-				pass
 			elif value < columns:
 				remove_columns(abs(columns - value))
 		columns = value
 		if is_ready:
-			update_facades()
+			_shift_followers(_end_corner() - end_before)
 
 ## Country whose style set this facade uses. Changing it resets
 ## [member style] so a new style can be picked from that country's directory.
@@ -603,14 +604,16 @@ func remove_ground_instances(from_col: int = 0):
 ## floors stack on top of its height.
 ## The repositioning is needed because instance positions are derived from
 ## the mesh width/height: without it, picking a wider or narrower mesh
-## would leave gaps or overlaps inside this facade. Finishes by calling
-## update_facades() so the following facades stay flush against this one.
+## would leave gaps or overlaps inside this facade. Finishes by shifting
+## the following facades by however far this facade's end corner moved
+## (see _shift_followers()).
 func update_instances():
 	if mesh == null:
 		return
 	var building := get_parent() as Building
 	if building == null:
 		return
+	var end_before := _end_corner()
 	for floor in range(0 if ground_mesh != null else 1, building.floors + 1):
 		var floor_mesh := _mesh_for_floor(floor)
 		var width := floor_mesh.get_aabb().size.z
@@ -621,25 +624,31 @@ func update_instances():
 			node.set_mesh(floor_mesh)
 			node.set_meta("model", _model_path_for_floor(floor))
 			node.position = Vector3(0, _floor_y(floor), col * width)
-	update_facades()
-	
-## Re-lays out every facade that comes after this one in the parent
-## Building, placing each corner-to-corner with its predecessor (see
-## _place_after()), so rotated corner facades are followed correctly.
-## This is a full re-layout rather than shifting facades by the width
-## difference, so it stays correct no matter what changed (mesh size,
-## column count, child order) and running it twice is a no-op.
-func update_facades() -> void:
+	_shift_followers(_end_corner() - end_before)
+		
+## Returns this facade's end corner (the far edge of its last column) in
+## parent space, i.e. run through this facade's transform so rotation is
+## accounted for.
+func _end_corner() -> Vector3:
+	return transform * Vector3(0, 0, _local_end_z())
+
+## Translates every facade that comes after this one in the parent
+## Building by [param delta]. Used instead of re-deriving follower
+## positions from scratch (see _place_after()) when this facade grows or
+## shrinks: straight runs stay flush because the delta is exactly the
+## added/removed width, and any manual offset the user made (e.g. a
+## vertex-snapped corner) is preserved because followers only translate.
+func _shift_followers(delta: Vector3) -> void:
+	if delta.is_zero_approx():
+		return
 	var parent := get_parent()
 	if parent == null:
 		return
-	var prev: Facade = self
 	for i in range(get_index() + 1, parent.get_child_count()):
 		var next := parent.get_child(i) as Facade
 		if next == null:
 			continue
-		next._place_after(prev)
-		prev = next
+		next.position += delta
 
 ## Returns the Z coordinate, in local space, of the far edge of this
 ## facade's last column. Both the top floor and the ground floor (when
@@ -665,7 +674,9 @@ func _local_end_z() -> float:
 ## When the chain turns, the outer wall edge (chosen by turn direction) is
 ## anchored instead of the x = 0 line, so the seam lands where a
 ## vertex-snapped corner would. Y is left untouched, and straight runs are
-## unaffected. Used by _ready() and update_facades().
+## unaffected. Used only by _ready() for a freshly added facade; changes
+## to an existing facade shift its followers instead (see
+## _shift_followers()), so manual adjustments are never overwritten.
 func _place_after(prev: Facade) -> void:
 	var prev_end: Vector3 = prev.transform * Vector3(0, 0, prev._local_end_z())
 	var start_offset: Vector3 = transform.basis * Vector3(0, 0, get_start_z())
