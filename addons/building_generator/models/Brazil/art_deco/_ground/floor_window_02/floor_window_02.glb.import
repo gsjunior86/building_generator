@@ -3,19 +3,21 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://brwhq3v1mibmj"
-path="res://.godot/imported/fenster_01.glb-39a6be4a2bf5047363d1f3a6e88bdaa8.scn"
+uid="uid://cbcyesqvritlq"
+path="res://.godot/imported/floor_window_02.glb-85d1983f97f23da0ca80dec58291118c.scn"
 
 [deps]
 
-source_file="res://addons/building_generator/models/Germany/zuckerbackerstill/fenster_01/fenster_01.glb"
-dest_files=["res://.godot/imported/fenster_01.glb-39a6be4a2bf5047363d1f3a6e88bdaa8.scn"]
+source_file="res://addons/building_generator/models/Brazil/art_deco/_ground/floor_window_02/floor_window_02.glb"
+dest_files=["res://.godot/imported/floor_window_02.glb-85d1983f97f23da0ca80dec58291118c.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
+mesh_library/use_node_names_as_mesh_names=false
+array_mesh/deduplicate_surfaces=true
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
@@ -39,16 +41,17 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "meshes": {
-"fenster_01_Cube_004": {
+"floor_window_02_Cube_012": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/building_generator/models/Germany/zuckerbackerstill/fenster_01/fenster_01.res",
-"save_to_file/path": "uid://bch2k83hwfji1"
+"save_to_file/fallback_path": "res://addons/building_generator/models/Brazil/art_deco/_ground/floor_window_02/floor_window_02.res",
+"save_to_file/path": "uid://djo1gdn4tb5a8"
 }
 }
 }
 gltf/naming_version=2
 gltf/embedded_image_handling=1
+gltf/texture_map_mode=0
