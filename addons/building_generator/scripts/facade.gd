@@ -401,7 +401,8 @@ func _enter_tree():
 		tree_entered.connect(initialize)
 	
 ## Builds the floor/column grid and, for a freshly added facade only,
-## positions it flush against the previous facade along Z.
+## positions it corner-to-corner with the previous facade (see
+## _place_after()).
 ## Facades loaded from a saved scene already have their children and a
 ## saved position, so the offset is skipped for them; otherwise every
 ## scene reload would keep accumulating a new offset on top of the saved one.
@@ -415,7 +416,7 @@ func _ready() -> void:
 	var lastFacade: Facade = get_parent().get_child(my_index - 1) as Facade
 	if lastFacade == null:
 		return
-	self.position = Vector3(self.position.x, self.position.y, lastFacade.get_end_z() - get_start_z())
+	_place_after(lastFacade)
 		
 		
 ## Returns true if a direct child with the given name exists.
@@ -560,17 +561,20 @@ func add_columns(col_count: int):
 				if Engine.is_editor_hint():
 					floor3D.owner = get_tree().edited_scene_root
 				notify_property_list_changed()
-		add_ground_instances()
+		add_ground_instances(columns, col_count)
 	
-## Adds one ground-floor instance (floor 0) per column, skipping ones that
-## already exist (e.g. restored from a saved scene). Called when a ground
-## model is selected and after columns are added, so the ground floor
-## always follows the column count.
-func add_ground_instances():
+## Adds one ground-floor instance (floor 0) per column in
+## [param from_col]..[param to_col] (all columns by default), skipping
+## ones that already exist (e.g. restored from a saved scene). Called when
+## a ground model is selected and after columns are added, so the ground
+## floor always follows the column count.
+func add_ground_instances(from_col: int = 0, to_col: int = -1):
 	if ground_mesh == null:
 		return
+	if to_col < 0:
+		to_col = columns
 	var width := ground_mesh.get_aabb().size.z
-	for col in columns:
+	for col in range(from_col, to_col):
 		var name = name_format.format([col, 0])
 		if get_node_or_null(name) != null:
 			continue
@@ -620,7 +624,8 @@ func update_instances():
 	update_facades()
 	
 ## Re-lays out every facade that comes after this one in the parent
-## Building, placing each flush against its predecessor's far edge.
+## Building, placing each corner-to-corner with its predecessor (see
+## _place_after()), so rotated corner facades are followed correctly.
 ## This is a full re-layout rather than shifting facades by the width
 ## difference, so it stays correct no matter what changed (mesh size,
 ## column count, child order) and running it twice is a no-op.
@@ -633,25 +638,45 @@ func update_facades() -> void:
 		var next := parent.get_child(i) as Facade
 		if next == null:
 			continue
-		next.position = Vector3(next.position.x, next.position.y, prev.get_end_z() - next.get_start_z())
+		next._place_after(prev)
 		prev = next
 
-## Returns the Z coordinate, in parent space, of the far edge of this
+## Returns the Z coordinate, in local space, of the far edge of this
 ## facade's last column. Both the top floor and the ground floor (when
 ## present) are considered, since their meshes may differ in width.
-## Falls back to the facade's own position when the grid or mesh isn't
-## available yet (e.g. while a scene is still loading).
-func get_end_z() -> float:
+## Returns 0 when the grid or mesh isn't available yet (e.g. while a
+## scene is still loading).
+func _local_end_z() -> float:
 	var building := get_parent() as Building
 	if building == null:
-		return position.z
-	var end_z := position.z
+		return 0.0
+	var end_z := 0.0
 	var floors_to_check := [0, building.floors] if ground_mesh != null else [building.floors]
 	for floor_num in floors_to_check:
 		var last_mesh := get_node_or_null(name_format.format([columns - 1, floor_num])) as MeshInstance3D
 		if last_mesh != null and last_mesh.mesh != null:
-			end_z = max(end_z, position.z + last_mesh.position.z + last_mesh.mesh.get_aabb().end.z)
+			end_z = max(end_z, last_mesh.position.z + last_mesh.mesh.get_aabb().end.z)
 	return end_z
+
+## Positions this facade so its start corner coincides with the previous
+## facade's end corner, in parent space. Because the corners are computed
+## through each facade's transform, rotated facades (e.g. 45° corners) are
+## handled: the offset follows the previous facade's facing direction.
+## When the chain turns, the outer wall edge (chosen by turn direction) is
+## anchored instead of the x = 0 line, so the seam lands where a
+## vertex-snapped corner would. Y is left untouched, and straight runs are
+## unaffected. Used by _ready() and update_facades().
+func _place_after(prev: Facade) -> void:
+	var prev_end: Vector3 = prev.transform * Vector3(0, 0, prev._local_end_z())
+	var start_offset: Vector3 = transform.basis * Vector3(0, 0, get_start_z())
+	position = Vector3(prev_end.x - start_offset.x, position.y, prev_end.z - start_offset.z)
+	var turn := prev.transform.basis.z.cross(transform.basis.z).y
+	if abs(turn) > 0.001 and mesh != null and prev.mesh != null:
+		var prev_aabb := prev.mesh.get_aabb()
+		var my_aabb := mesh.get_aabb()
+		var prev_x := prev_aabb.position.x if turn > 0.0 else prev_aabb.end.x
+		var my_x := my_aabb.position.x if turn > 0.0 else my_aabb.end.x
+		position += prev.transform.basis * Vector3(prev_x, 0, 0) - transform.basis * Vector3(my_x, 0, 0)
 
 ## Returns the Z coordinate, in local space, where this facade's mesh
 ## geometry begins. Zero when the mesh origin sits at its edge; otherwise
